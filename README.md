@@ -24,29 +24,30 @@ A modern, highly-customizable web dashboard for deploying and managing Left 4 De
 - Node.js 18+ and npm
 - `lib32gcc-s1` (Required by SteamCMD)
 
-### Installation
-1. Clone the repository:
+### Installation (For Beginners)
+
+We've created a completely automated, one-click installer designed for absolute beginners. You don't need to know how to set up databases or node modules.
+
+1. Open your terminal on your Linux server and clone the repository:
    ```bash
    git clone git@github.com:howlcipher/l4d2_server_manager.git
    cd l4d2_server_manager
    ```
-2. Install dependencies:
+2. Run the automated setup script:
    ```bash
-   npm install
+   ./setup.sh
    ```
-3. Generate the Prisma database client and push the schema:
+   *This script will automatically install Node.js, download dependencies, configure the database, inject the default admin account, and build the dashboard.*
+
+3. Start the dashboard in the background so it runs 24/7:
    ```bash
-   npx prisma generate
-   npx prisma db push
-   node seed.js
+   npx pm2 start npm --name "l4d2-manager" -- start
    ```
-4. Start the application:
-   ```bash
-   npm run build
-   npm run start
-   # Or for development: npm run dev
-   ```
-5. Navigate to `http://localhost:3000` and login with `admin` and `123`.
+
+4. Go to `http://YOUR_SERVER_IP:3000` in your web browser.
+5. Login with Username: `admin` and Password: `123`
+
+*(Note: Once logged in, click "Install Server & Core Mods" from the dashboard to download the actual L4D2 server files).*
 
 ## 🎨 Architecture
 - **Frontend:** Next.js App Router (React), Tailwind CSS, Framer Motion for animations, Lucide Icons.
