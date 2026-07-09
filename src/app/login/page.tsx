@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Lock, User } from 'lucide-react';
+import { Lock, User, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Login() {
@@ -35,18 +35,20 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4 bg-background text-foreground">
+    <main className="min-h-screen flex flex-col transition-colors duration-300 relative overflow-auto bg-background text-foreground" style={{ backgroundImage: "url('/bg.jpg')", backgroundAttachment: "fixed" }}>
+      <table border={5} cellPadding={15} cellSpacing={5} align="center" style={{ borderColor: '#00ff00', backgroundColor: '#111', width: '90%', maxWidth: '500px', margin: '50px auto' }}>
+        <tbody><tr><td>
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md glass-panel p-8"
+        className="w-full max-w-md p-8"
       >
-        <div className="text-center mb-8">
-          <div className="inline-flex p-4 bg-danger/10 rounded-full text-danger border border-danger/20 mb-4">
-            <Server size={32} />
+        <div className="text-center mb-8 border-4 border-green-500 bg-black p-4">
+          <div className="inline-flex p-4 bg-black rounded-2xl text-danger border-[5px] border-red-500 mb-4">
+            <img src="/logo.jpg" alt="Logo" width="64" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Admin Access</h1>
-          <p className="text-muted mt-2">Login to manage your L4D2 server</p>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1 font-impact uppercase" style={{ color: "yellow", textShadow: "2px 2px #ff0000" }}>Admin Access</h1>
+          <p className="text-green-400 font-mono text-sm md:text-lg font-bold">Login to manage your L4D2 server</p>
         </div>
 
         {error && (
@@ -92,6 +94,8 @@ export default function Login() {
           Need an account? <Link href="/register" className="text-brand hover:underline font-medium focus-ring rounded">Create Admin Account</Link>
         </div>
       </motion.div>
+        </td></tr></tbody>
+      </table>
     </main>
   );
 }
