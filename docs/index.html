@@ -10,19 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-mode">
-    
+    <bgsound src="https://bitmidi.com/uploads/16279.mid" loop="infinite">
+    <audio autoplay loop style="display:none;" id="bgm">
+        <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi">
+    </audio>
+
     <div class="top-bar">
-        <select id="lang-select" aria-label="Select Language">
-            <option value="en">🇺🇸 English</option>
-            <option value="es">🇪🇸 Español (Spanish)</option>
-            <option value="ru">🇷🇺 Русский (Russian)</option>
-            <option value="zh">🇨🇳 中文 (Chinese)</option>
-            <option value="de">🇩🇪 Deutsch (German)</option>
-            <option value="fi">🇫🇮 Suomi (Finnish)</option>
-            <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
-            <option value="pl">🇵🇱 Polski (Polish)</option>
-            <option value="ja">🇯🇵 日本語 (Japanese)</option>
-        </select>
+        <span class="flag-btn" data-lang="en">🇺🇸</span>
+        <span class="flag-btn" data-lang="es">🇪🇸</span>
+        <span class="flag-btn" data-lang="ru">🇷🇺</span>
+        <span class="flag-btn" data-lang="zh">🇨🇳</span>
+        <span class="flag-btn" data-lang="de">🇩🇪</span>
+        <span class="flag-btn" data-lang="fi">🇫🇮</span>
+        <span class="flag-btn" data-lang="hi">🇮🇳</span>
+        <span class="flag-btn" data-lang="pl">🇵🇱</span>
+        <span class="flag-btn" data-lang="ja">🇯🇵</span>
     </div>
 
     <header>
@@ -35,6 +37,14 @@
 
     <main>
         <marquee direction="right" scrollamount="12">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
+        
+        <div id="ip-grabber" class="ip-grabber">
+            <p><blink>⚠️ INTRUDER ALERT ⚠️</blink></p>
+            <p>WE ARE TRACKING YOU. YOUR IP IS: <span id="user-ip">LOCATING...</span></p>
+            <p>BROWSER: <span id="user-browser"></span></p>
+            <p>THE HORDE IS ON ITS WAY...</p>
+        </div>
+
         <section class="hero">
             <p id="hero-tagline" class="tagline">TAKE ABSOLUTE CONTROL.</p>
             <p id="hero-desc" class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
@@ -79,13 +89,12 @@
 
         <section class="roadmap">
             <div class="section-header">
-                <h3 id="road-title">INCOMING HORDE (ROADMAP)</h3>
-                <div class="divider"></div>
+                <h3 id="road-title">NEW FEATURES INCLUDED</h3>
             </div>
             <ul class="roadmap-list">
-                <li><span class="status status-done" id="stat-1-badge">Live</span> <span id="road-1">Live Server Console & Chat Streaming</span></li>
-                <li><span class="status status-done" id="stat-2-badge">Live</span> <span id="road-2">Multi-user Sub-admin Management</span></li>
-                <li><span class="status status-done" id="stat-3-badge">Live</span> <span id="road-3">Automated SteamCMD Updates</span></li>
+                <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-1-badge">Live</span> <span id="road-1">Live Server Console & Chat Streaming</span></li>
+                <li><img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/hot.gif" alt="HOT"> <span class="status status-done" id="stat-2-badge">Live</span> <span id="road-2">Multi-user Sub-admin Management</span></li>
+                <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-3-badge">Live</span> <span id="road-3">Automated SteamCMD Updates</span></li>
                 <li><span class="status status-done" id="stat-4-badge">Live</span> <span id="road-4">Discord Webhook Integration</span></li>
             </ul>
         </section>
@@ -96,6 +105,19 @@
             <a href="http://localhost:3000/guestbook" target="_blank" style="color: yellow; font-size: 20px; font-weight: bold; background: #ff0000; padding: 5px; text-decoration: none; border: 2px solid white;">[ 📖 SIGN MY GUESTBOOK ]</a>
             <p style="font-size: 14px; color: #fff;">(Requires L4D2 Manager server running locally)</p>
         </div>
+        
+        <div class="webring">
+            <p><strong><blink>ZOMBIE SURVIVORS WEBRING</blink></strong></p>
+            <a href="#" style="color:var(--l4d-green)">[<- Previous]</a> <a href="#" style="color:yellow">[Random]</a> <a href="#" style="color:var(--l4d-green)">[Next ->]</a>
+        </div>
+
+        <div class="badges">
+            <img src="https://cyber.dabamos.de/88x31/netscape4.gif" alt="Netscape">
+            <img src="https://cyber.dabamos.de/88x31/ie01.gif" alt="Internet Explorer">
+            <img src="https://cyber.dabamos.de/88x31/bestviewed.gif" alt="Best Viewed 800x600">
+            <img src="https://cyber.dabamos.de/88x31/html2.gif" alt="HTML 3.2">
+        </div>
+
         <p id="footer-text">Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation.</p>
         <div class="hit-counter">
             <p>You are survivor number:</p>
@@ -105,13 +127,13 @@
     </footer>
 
     <script>
+        const langBtns = document.querySelectorAll('.flag-btn');
         const translations = {
             en: {
                 "title-sub": "SERVER MANAGER",
                 "hero-tagline": "TAKE ABSOLUTE CONTROL.",
                 "hero-desc": "Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.",
                 "btn-github": "VIEW ON GITHUB",
-                "btn-features": "EXPLORE FEATURES",
                 "feat-title": "THE ARSENAL",
                 "feat-1-title": "ONE-CLICK DEPLOY",
                 "feat-1-desc": "Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.",
@@ -134,7 +156,6 @@
                 "hero-tagline": "TOMA EL CONTROL ABSOLUTO.",
                 "hero-desc": "Despliega, configura y gestiona tu servidor dedicado L4D2 desde un panel web premium. No más terminales. No más FTP.",
                 "btn-github": "VER EN GITHUB",
-                "btn-features": "EXPLORAR FUNCIONES",
                 "feat-title": "EL ARSENAL",
                 "feat-1-title": "DESPLIEGUE EN UN CLIC",
                 "feat-1-desc": "Instalación automatizada de SteamCMD, descargas de servidor e integración de Metamod/SourceMod directamente desde el navegador.",
@@ -157,7 +178,6 @@
                 "hero-tagline": "ВОЗЬМИТЕ АБСОЛЮТНЫЙ КОНТРОЛЬ.",
                 "hero-desc": "Развертывайте, настраивайте и управляйте своим выделенным сервером L4D2 из премиальной веб-панели. Больше никаких терминалов. Больше никакого FTP.",
                 "btn-github": "ПОСМОТРЕТЬ НА GITHUB",
-                "btn-features": "ИЗУЧИТЬ ФУНКЦИИ",
                 "feat-title": "АРСЕНАЛ",
                 "feat-1-title": "РАЗВЕРТЫВАНИЕ В ОДИН КЛИК",
                 "feat-1-desc": "Автоматизированная установка SteamCMD, загрузка сервера и интеграция Metamod/SourceMod прямо из браузера.",
@@ -180,7 +200,6 @@
                 "hero-tagline": "掌握绝对控制权。",
                 "hero-desc": "通过高级Web面板部署、配置和管理您的L4D2专用服务器。不再需要终端，不再需要FTP。",
                 "btn-github": "在GITHUB上查看",
-                "btn-features": "探索功能",
                 "feat-title": "军械库",
                 "feat-1-title": "一键部署",
                 "feat-1-desc": "直接从浏览器自动安装SteamCMD、下载服务器和集成Metamod/SourceMod。",
@@ -203,7 +222,6 @@
                 "hero-tagline": "ÜBERNIMM DIE ABSOLUTE KONTROLLE.",
                 "hero-desc": "Stelle deinen L4D2 Dedicated Server über ein Premium-Web-Dashboard bereit, konfiguriere und verwalte ihn. Keine Terminals mehr. Kein FTP mehr.",
                 "btn-github": "AUF GITHUB ANSEHEN",
-                "btn-features": "FUNKTIONEN ENTDECKEN",
                 "feat-title": "DAS ARSENAL",
                 "feat-1-title": "ONE-CLICK DEPLOY",
                 "feat-1-desc": "Automatisierte SteamCMD-Installation, Server-Downloads und Metamod/SourceMod-Integration direkt aus dem Browser.",
@@ -226,7 +244,6 @@
                 "hero-tagline": "OTA TÄYSI HALLINTA.",
                 "hero-desc": "Ota käyttöön, määritä ja hallinnoi L4D2-palvelintasi ensiluokkaisesta verkkokojelaudasta. Ei enää terminaaleja. Ei enää FTP:tä.",
                 "btn-github": "KATSO GITHUBISSA",
-                "btn-features": "TUTKI OMINAISUUKSIA",
                 "feat-title": "ARSENAALI",
                 "feat-1-title": "YHDEN NAPIN ASENNUS",
                 "feat-1-desc": "Automaattinen SteamCMD-asennus, palvelinlataukset ja Metamod/SourceMod-integraatio suoraan selaimesta.",
@@ -249,7 +266,6 @@
                 "hero-tagline": "पूर्ण नियंत्रण लें।",
                 "hero-desc": "एक प्रीमियम वेब डैशबोर्ड से अपने L4D2 समर्पित सर्वर को तैनात, कॉन्फ़िगर और प्रबंधित करें। कोई टर्मिनल नहीं। कोई FTP नहीं।",
                 "btn-github": "GITHUB पर देखें",
-                "btn-features": "सुविधाओं का अन्वेषण करें",
                 "feat-title": "शस्त्रागार",
                 "feat-1-title": "एक-क्लिक परिनियोजन",
                 "feat-1-desc": "सीधे ब्राउज़र से स्वचालित SteamCMD इंस्टॉलेशन, सर्वर डाउनलोड और Metamod/SourceMod एकीकरण।",
@@ -272,7 +288,6 @@
                 "hero-tagline": "PRZEJMIJ CAŁKOWITĄ KONTROLĘ.",
                 "hero-desc": "Wdrażaj, konfiguruj i zarządzaj swoim dedykowanym serwerem L4D2 z poziomu interfejsu WWW. Żadnych terminali. Żadnego FTP.",
                 "btn-github": "ZOBACZ NA GITHUBIE",
-                "btn-features": "ODKRYJ FUNKCJE",
                 "feat-title": "ARSENAŁ",
                 "feat-1-title": "INSTALACJA JEDNYM KLIKNIĘCIEM",
                 "feat-1-desc": "Zautomatyzowana instalacja SteamCMD, pobieranie serwera i integracja Metamod/SourceMod prosto z przeglądarki.",
@@ -295,7 +310,6 @@
                 "hero-tagline": "絶対的なコントロールを手に入れろ。",
                 "hero-desc": "プレミアムなWebダッシュボードからL4D2専用サーバーを展開、構成、管理します。ターミナルもFTPも不要です。",
                 "btn-github": "GITHUBで見る",
-                "btn-features": "機能を探る",
                 "feat-title": "アーセナル",
                 "feat-1-title": "ワンクリック展開",
                 "feat-1-desc": "ブラウザから直接、自動化されたSteamCMDのインストール、サーバーのダウンロード、およびMetamod/SourceModの統合。",
@@ -309,36 +323,77 @@
                 "stat-1-badge": "ライブ", "stat-2-badge": "ライブ", "stat-3-badge": "ライブ", "stat-4-badge": "ライブ",
                 "road-1": "ライブサーバーコンソールとチャットストリーミング",
                 "road-2": "マルチユーザーサブ管理者管理",
-                "road-3": "自動SteamCMDアップデート",
+                "road3": "自動SteamCMDアップデート",
                 "road-4": "Discord Webhook統合",
                 "footer-text": "L4D2モッディングコミュニティのために作成されました。Valve Corporationとは関係ありません。"
             }
         };
 
-        const langSelect = document.getElementById('lang-select');
-        langSelect.addEventListener('change', (e) => {
-            const lang = e.target.value;
+        function setLanguage(lang) {
             const t = translations[lang];
+            if (!t) return;
             for (let id in t) {
                 const el = document.getElementById(id);
                 if (el) el.innerText = t[id];
             }
-            document.documentElement.lang = lang;
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.getAttribute('data-lang'));
+            });
         });
 
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        themeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                themeToggle.innerText = '🌙';
-            } else {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                themeToggle.innerText = '🌞';
-            }
+        fetch('https://api.ipify.org?format=json')
+            .then(r => r.json())
+            .then(data => {
+                const ipSpan = document.getElementById('user-ip');
+                if(ipSpan) ipSpan.textContent = data.ip;
+                const browserSpan = document.getElementById('user-browser');
+                if(browserSpan) browserSpan.textContent = navigator.appName + " " + navigator.appVersion;
+            })
+            .catch(() => {
+                const ipSpan = document.getElementById('user-ip');
+                if(ipSpan) ipSpan.textContent = "UNKNOWN... BUT WE KNOW WHERE YOU LIVE.";
+            });
+
+        const trailElements = [];
+        const trailCount = 10;
+        const trailChars = ['🩸', '🧟', '💀', '🧠'];
+        
+        for (let i = 0; i < trailCount; i++) {
+            let el = document.createElement('div');
+            el.className = 'trail';
+            el.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
+            document.body.appendChild(el);
+            trailElements.push(el);
+        }
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let historyX = Array(trailCount).fill(mouseX);
+        let historyY = Array(trailCount).fill(mouseY);
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
         });
+
+        function animateTrail() {
+            historyX.unshift(mouseX);
+            historyY.unshift(mouseY);
+            historyX.pop();
+            historyY.pop();
+
+            for (let i = 0; i < trailCount; i++) {
+                let el = trailElements[i];
+                el.style.left = (historyX[i] + 10 + i * 2) + 'px';
+                el.style.top = (historyY[i] + 10 + i * 2) + 'px';
+                el.style.opacity = 1 - (i / trailCount);
+            }
+            requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
     </script>
 </body>
 </html>
