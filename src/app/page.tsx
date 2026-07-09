@@ -2,10 +2,82 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { signOut } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
-import { Server, Power, Play, Settings, ShieldAlert, Download, Cpu, HardDrive, LogOut, Upload, FileText, Save } from 'lucide-react';
+import { Server, Power, Play, Settings, Download, LogOut, Upload, FileText, Save, Moon, Sun, Eye, Terminal, MessageSquare, Users, RefreshCw, Globe } from 'lucide-react';
+
+const i18n: Record<string, Record<string, string>> = {
+  en: {
+    title: "L4D2 Manager", sub: "Custom Server & Mod Controller", skip: "Skip to main content",
+    ctrl: "Server Control", start: "Start Server", stop: "Stop Server",
+    setup: "Initial Setup", install: "Install Server & Core Mods",
+    up: "Mod & VPK Upload", upDesc: "Upload custom campaigns, scripts, or SourceMod plugins directly to the addons folder.",
+    sel: "Select File (.vpk, .smx)", upg: "Uploading...",
+    cfg: "Config Editor", save: "Save File", svg: "Saving...",
+    cons: "Live Server Console", consDesc: "Console stream will appear here while server is running...",
+    disc: "Discord Webhook", discDesc: "Enter Webhook URL", saveD: "Save Webhook",
+    upd: "Server Updates", runUpd: "Update via SteamCMD",
+    usr: "Admin Management", addU: "Add Sub-Admin",
+    logout: "Logout", cb: "Color Blind Mode"
+  },
+  fi: {
+    title: "L4D2-hallinta", sub: "Mukautettu palvelin", skip: "Siirry sisältöön",
+    ctrl: "Palvelimen hallinta", start: "Käynnistä", stop: "Sammuta",
+    setup: "Alkuasennus", install: "Asenna palvelin ja modit",
+    up: "Lataa VPK", upDesc: "Lataa mukautettuja kampanjoita ja laajennuksia.",
+    sel: "Valitse tiedosto", upg: "Ladataan...",
+    cfg: "Asetuseditori", save: "Tallenna", svg: "Tallennetaan...",
+    cons: "Live-konsoli", consDesc: "Konsolin virta näkyy tässä...",
+    disc: "Discord Webhook", discDesc: "Anna Webhook URL", saveD: "Tallenna",
+    upd: "Päivitykset", runUpd: "Päivitä SteamCMD:n kautta",
+    usr: "Käyttäjien hallinta", addU: "Lisää ylläpitäjä",
+    logout: "Kirjaudu ulos", cb: "Värisokeiden tila"
+  },
+  hi: {
+    title: "L4D2 प्रबंधक", sub: "कस्टम सर्वर", skip: "मुख्य सामग्री पर जाएं",
+    ctrl: "सर्वर नियंत्रण", start: "सर्वर प्रारंभ करें", stop: "सर्वर रोकें",
+    setup: "प्रारंभिक सेटअप", install: "सर्वर स्थापित करें",
+    up: "VPK अपलोड करें", upDesc: "कस्टम अभियान और प्लगइन्स अपलोड करें।",
+    sel: "फ़ाइल चुनें", upg: "अपलोड हो रहा है...",
+    cfg: "कॉन्फ़िगरेशन संपादक", save: "सहेजें", svg: "सहेजा जा रहा है...",
+    cons: "लाइव कंसोल", consDesc: "कंसोल स्ट्रीम यहां दिखाई देगी...",
+    disc: "Discord वेबहुक", discDesc: "वेबहुक URL दर्ज करें", saveD: "सहेजें",
+    upd: "सर्वर अपडेट", runUpd: "SteamCMD के माध्यम से अपडेट करें",
+    usr: "उपयोगकर्ता प्रबंधन", addU: "व्यवस्थापक जोड़ें",
+    logout: "लॉग आउट", cb: "कलर ब्लाइंड मोड"
+  },
+  pl: {
+    title: "Menedżer L4D2", sub: "Niestandardowy serwer", skip: "Przejdź do głównej treści",
+    ctrl: "Kontrola serwera", start: "Uruchom serwer", stop: "Zatrzymaj serwer",
+    setup: "Początkowa konfiguracja", install: "Zainstaluj serwer",
+    up: "Prześlij VPK", upDesc: "Prześlij niestandardowe kampanie i wtyczki.",
+    sel: "Wybierz plik", upg: "Przesyłanie...",
+    cfg: "Edytor konfiguracji", save: "Zapisz", svg: "Zapisywanie...",
+    cons: "Konsola na żywo", consDesc: "Strumień konsoli pojawi się tutaj...",
+    disc: "Discord Webhook", discDesc: "Wprowadź adres URL Webhooka", saveD: "Zapisz",
+    upd: "Aktualizacje", runUpd: "Aktualizuj przez SteamCMD",
+    usr: "Zarządzanie użytkownikami", addU: "Dodaj administratora",
+    logout: "Wyloguj", cb: "Tryb dla daltonistów"
+  },
+  ja: {
+    title: "L4D2マネージャー", sub: "カスタムサーバー", skip: "メインコンテンツへスキップ",
+    ctrl: "サーバー制御", start: "サーバー起動", stop: "サーバー停止",
+    setup: "初期セットアップ", install: "サーバーをインストール",
+    up: "VPKのアップロード", upDesc: "カスタムキャンペーンとプラグインをアップロードします。",
+    sel: "ファイルを選択", upg: "アップロード中...",
+    cfg: "構成エディター", save: "保存", svg: "保存中...",
+    cons: "ライブコンソール", consDesc: "コンソールストリームがここに表示されます...",
+    disc: "Discord Webhook", discDesc: "Webhook URLを入力", saveD: "保存",
+    upd: "サーバーの更新", runUpd: "SteamCMDで更新",
+    usr: "ユーザー管理", addU: "管理者を追加",
+    logout: "ログアウト", cb: "色覚異常モード"
+  }
+};
 
 export default function Home() {
+  const [lang, setLang] = useState('en');
+  const t = i18n[lang];
+
   const [status, setStatus] = useState<'running' | 'stopped' | 'loading'>('loading');
   const [installing, setInstalling] = useState(false);
   const [message, setMessage] = useState('');
@@ -17,6 +89,18 @@ export default function Home() {
   const [savingConfig, setSavingConfig] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Theme & Accessibility
+  const { theme, setTheme } = useTheme();
+  const [isColorBlind, setIsColorBlind] = useState(false);
+
+  useEffect(() => {
+    if (isColorBlind) {
+      document.documentElement.setAttribute('data-theme', 'color-blind');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, [isColorBlind]);
 
   const fetchStatus = async () => {
     try {
@@ -57,7 +141,7 @@ export default function Home() {
       if (!data.success) {
         setMessage(data.message);
       } else {
-        setMessage('');
+        setMessage(action === 'start' ? 'Server started successfully.' : 'Server stopped.');
       }
       fetchStatus();
     } catch (e) {
@@ -135,179 +219,243 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-6 md:p-12 lg:p-24 flex flex-col items-center justify-start relative overflow-auto">
+    <div className="min-h-screen flex flex-col transition-colors duration-300 relative overflow-auto bg-background text-foreground">
       
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-5xl glass-panel p-8 md:p-12 z-10 mb-8"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-white/10 pb-8 gap-6">
-          <div className="flex items-center gap-5">
-            <motion.div 
-              whileHover={{ scale: 1.05, rotate: 5 }}
-              className="p-4 bg-red-500/10 rounded-2xl text-red-500 border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.15)]"
-            >
-              <Server size={36} />
-            </motion.div>
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">L4D2 Manager</h1>
-              <p className="text-gray-400 text-sm md:text-base">Custom Server & Mod Controller</p>
-            </div>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row items-end sm:items-center gap-4">
-            <div className="flex items-center gap-3 bg-black/30 px-5 py-3 rounded-full border border-white/5">
-              <div className={`w-3 h-3 rounded-full ${status === 'running' ? 'bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)]' : status === 'loading' ? 'bg-yellow-500 animate-pulse' : 'bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]'}`} />
-              <span className="font-bold text-sm uppercase tracking-widest text-gray-200">
-                {status}
-              </span>
-            </div>
-            <button 
-              onClick={() => signOut()}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-full border border-red-500/20 transition-all text-sm font-medium"
-            >
-              <LogOut size={16} /> Logout
-            </button>
-          </div>
-        </div>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand text-white p-4 rounded z-50">
+        {t.skip}
+      </a>
 
-        {message && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
-            className="mb-8 p-4 bg-white/5 border border-white/10 text-gray-200 rounded-xl text-sm font-medium"
+      <header className="w-full p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-border bg-glass backdrop-blur-md sticky top-0 z-40">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="p-2 rounded-full hover:bg-secondary focus-ring transition-colors"
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {message}
-          </motion.div>
-        )}
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          
+          <button 
+            onClick={() => setIsColorBlind(!isColorBlind)}
+            className={`p-2 rounded-full focus-ring transition-colors flex items-center gap-2 ${isColorBlind ? 'bg-brand/20 text-brand' : 'hover:bg-secondary'}`}
+            aria-label="Toggle Color Blind Mode"
+            aria-pressed={isColorBlind}
+          >
+            <Eye size={20} /> <span className="sr-only sm:not-sr-only text-sm font-medium">{t.cb}</span>
+          </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-          {/* Quick Actions */}
-          <div className="glass-panel p-6 md:p-8 bg-black/10 border-white/5">
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-3 text-gray-200">
-              <Power size={22} className="text-red-400" /> Server Control
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => handleAction('start')}
-                disabled={status === 'running' || status === 'loading'}
-                className="flex-1 flex items-center justify-center gap-2 btn-primary py-3.5 rounded-xl font-semibold tracking-wide disabled:opacity-50 disabled:cursor-not-allowed group"
-              >
-                <Play size={18} className="group-hover:scale-110 transition-transform" /> Start Server
-              </button>
-              <button 
-                onClick={() => handleAction('stop')}
-                disabled={status === 'stopped' || status === 'loading'}
-                className="flex-1 flex items-center justify-center gap-2 btn-secondary py-3.5 rounded-xl font-semibold tracking-wide disabled:opacity-50 disabled:cursor-not-allowed group"
-              >
-                <Power size={18} className="group-hover:scale-110 transition-transform" /> Stop Server
-              </button>
-            </div>
-          </div>
-
-          {/* Setup / Install */}
-          <div className="glass-panel p-6 md:p-8 bg-black/10 border-white/5">
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-3 text-gray-200">
-              <Download size={22} className="text-blue-400" /> Initial Setup
-            </h2>
-            <button 
-              onClick={handleInstall}
-              disabled={installing}
-              className="w-full flex items-center justify-center gap-2 btn-secondary py-3.5 rounded-xl font-semibold tracking-wide disabled:opacity-50 group hover:bg-blue-500/10 hover:text-blue-400 hover:border-blue-500/30 transition-all"
+          <div className="flex items-center gap-2 bg-secondary border border-border rounded-full px-3 py-1">
+            <Globe size={16} className="text-muted" />
+            <select 
+              value={lang} 
+              onChange={(e) => setLang(e.target.value)}
+              className="bg-transparent text-sm font-medium focus-ring focus:outline-none"
+              aria-label="Select Language"
             >
-              <Settings size={18} className={`group-hover:rotate-90 transition-transform duration-500 ${installing ? 'animate-spin text-blue-400' : ''}`} /> 
-              {installing ? 'Installing...' : 'Install Server & Core Mods'}
-            </button>
+              <option value="en">English</option>
+              <option value="fi">Suomi</option>
+              <option value="hi">हिन्दी</option>
+              <option value="pl">Polski</option>
+              <option value="ja">日本語</option>
+            </select>
           </div>
         </div>
 
-        {/* Upload & Config Editor Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          {/* File Upload Panel */}
-          <div className="glass-panel p-6 bg-black/10 border-white/5 col-span-1">
-            <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-gray-200">
-              <Upload size={20} className="text-green-400" /> Mod & VPK Upload
-            </h2>
-            <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-              Upload custom campaigns, scripts, or SourceMod plugins directly to the addons folder.
-            </p>
-            <input 
-              type="file" 
-              ref={fileInputRef}
-              onChange={handleFileUpload}
-              className="hidden" 
-              accept=".vpk,.smx,.cfg"
+        <div className="flex items-center gap-4">
+          <div 
+            className="flex items-center gap-3 bg-secondary px-5 py-2 rounded-full border border-border"
+            aria-live="polite"
+            role="status"
+          >
+            <div 
+              className={`w-3 h-3 rounded-full ${
+                status === 'running' ? 'bg-success shadow-[0_0_10px_var(--color-success)]' : 
+                status === 'loading' ? 'bg-warning animate-pulse' : 
+                'bg-danger shadow-[0_0_10px_var(--color-danger)]'
+              }`} 
+              aria-hidden="true"
             />
-            <button 
-              onClick={() => fileInputRef.current?.click()}
-              disabled={uploading}
-              className="w-full flex items-center justify-center gap-2 border border-dashed border-green-500/30 bg-green-500/5 hover:bg-green-500/10 text-green-400 py-6 rounded-xl font-medium transition-colors disabled:opacity-50"
-            >
-              <Upload size={24} /> {uploading ? 'Uploading...' : 'Select File (.vpk, .smx)'}
-            </button>
+            <span className="font-bold text-sm uppercase tracking-widest">
+              <span className="sr-only">Status: </span>{status}
+            </span>
           </div>
+          <button 
+            onClick={() => signOut()}
+            className="flex items-center gap-2 px-4 py-2 bg-danger/10 hover:bg-danger/20 text-danger rounded-full border border-danger/20 transition-all text-sm font-medium focus-ring"
+            aria-label={t.logout}
+          >
+            <LogOut size={16} aria-hidden="true" /> {t.logout}
+          </button>
+        </div>
+      </header>
 
-          {/* Config Editor Panel */}
-          <div className="glass-panel p-6 bg-black/10 border-white/5 col-span-1 lg:col-span-2 flex flex-col h-[500px]">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-200">
-                <FileText size={20} className="text-purple-400" /> Config Editor
-              </h2>
-              {selectedFile && (
-                <button 
-                  onClick={saveConfig}
-                  disabled={savingConfig}
-                  className="flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-                >
-                  <Save size={16} /> {savingConfig ? 'Saving...' : 'Save File'}
-                </button>
-              )}
-            </div>
+      <main id="main-content" className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 lg:p-12 focus:outline-none" tabIndex={-1}>
+        <div className="flex items-center gap-5 mb-10">
+          <div className="p-4 bg-danger/10 rounded-2xl text-danger border border-danger/20 shadow-[0_0_30px_rgba(239,68,68,0.15)]" aria-hidden="true">
+            <Server size={36} />
+          </div>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1">{t.title}</h1>
+            <p className="text-muted text-sm md:text-base">{t.sub}</p>
+          </div>
+        </div>
 
-            <div className="flex flex-col md:flex-row gap-4 h-full overflow-hidden">
-              {/* File List */}
-              <div className="w-full md:w-1/3 bg-black/30 rounded-xl border border-white/5 overflow-y-auto">
-                <ul className="p-2 space-y-1">
-                  {configFiles.map((file, i) => (
-                    <li key={i}>
-                      <button
-                        onClick={() => loadConfig(file)}
-                        className={`w-full text-left px-3 py-2 rounded-lg text-sm flex flex-col ${selectedFile?.name === file.name && selectedFile?.dirId === file.dirId ? 'bg-purple-500/20 text-purple-300' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}`}
-                      >
-                        <span className="font-medium truncate">{file.name}</span>
-                        <span className="text-[10px] opacity-60 truncate">{file.dirPath}</span>
-                      </button>
-                    </li>
-                  ))}
-                  {configFiles.length === 0 && (
-                    <div className="text-center p-4 text-sm text-gray-500">No configs found. Install server first.</div>
-                  )}
-                </ul>
+        <div aria-live="assertive" role="alert">
+          {message && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
+              className="mb-8 p-4 bg-secondary border border-border rounded-xl text-sm font-medium shadow-sm"
+            >
+              {message}
+            </motion.div>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-12">
+          {/* Main Controls - Left Column */}
+          <div className="col-span-1 xl:col-span-2 space-y-6">
+            
+            <section aria-labelledby="quick-actions-heading" className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="glass-panel p-6">
+                <h2 id="quick-actions-heading" className="text-xl font-semibold mb-6 flex items-center gap-3">
+                  <Power size={22} className="text-danger" aria-hidden="true" /> {t.ctrl}
+                </h2>
+                <div className="flex flex-col gap-3">
+                  <button 
+                    onClick={() => handleAction('start')}
+                    disabled={status === 'running' || status === 'loading'}
+                    className="w-full flex items-center justify-center gap-2 btn-primary py-3 rounded-xl font-semibold tracking-wide disabled:opacity-50 focus-ring"
+                  >
+                    <Play size={18} /> {t.start}
+                  </button>
+                  <button 
+                    onClick={() => handleAction('stop')}
+                    disabled={status === 'stopped' || status === 'loading'}
+                    className="w-full flex items-center justify-center gap-2 btn-secondary py-3 rounded-xl font-semibold tracking-wide disabled:opacity-50 focus-ring"
+                  >
+                    <Power size={18} /> {t.stop}
+                  </button>
+                </div>
               </div>
 
-              {/* Editor */}
-              <div className="w-full md:w-2/3 bg-black/40 rounded-xl border border-white/5 p-4 flex flex-col">
-                {selectedFile ? (
-                  <textarea
-                    value={configContent}
-                    onChange={(e) => setConfigContent(e.target.value)}
-                    className="w-full h-full bg-transparent text-gray-300 font-mono text-sm resize-none focus:outline-none placeholder-gray-600"
-                    placeholder="File content..."
-                    spellCheck={false}
-                  />
-                ) : (
-                  <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
-                    Select a configuration file to edit
-                  </div>
+              <div className="glass-panel p-6">
+                <h2 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                  <Download size={22} className="text-brand" aria-hidden="true" /> {t.setup}
+                </h2>
+                <button 
+                  onClick={handleInstall}
+                  disabled={installing}
+                  className="w-full flex items-center justify-center gap-2 btn-secondary py-3 rounded-xl font-semibold tracking-wide disabled:opacity-50 focus-ring mb-3"
+                >
+                  <Settings size={18} className={installing ? 'animate-spin' : ''} /> 
+                  {installing ? '...' : t.install}
+                </button>
+                <button className="w-full flex items-center justify-center gap-2 border border-brand/30 bg-brand/10 text-brand py-3 rounded-xl font-semibold tracking-wide hover:bg-brand/20 transition-colors focus-ring">
+                  <RefreshCw size={18} /> {t.runUpd}
+                </button>
+              </div>
+            </section>
+
+            <section className="glass-panel p-6 flex flex-col h-[500px]">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold flex items-center gap-2">
+                  <FileText size={20} className="text-brand" aria-hidden="true" /> {t.cfg}
+                </h3>
+                {selectedFile && (
+                  <button 
+                    onClick={saveConfig}
+                    disabled={savingConfig}
+                    className="flex items-center gap-2 btn-primary px-4 py-2 rounded-lg text-sm font-medium focus-ring"
+                  >
+                    <Save size={16} /> {savingConfig ? t.svg : t.save}
+                  </button>
                 )}
               </div>
+              <div className="flex flex-col md:flex-row gap-4 h-full overflow-hidden">
+                <nav className="w-full md:w-1/3 bg-secondary rounded-xl border border-border overflow-y-auto">
+                  <ul className="p-2 space-y-1">
+                    {configFiles.map((file, i) => {
+                      const isSelected = selectedFile?.name === file.name && selectedFile?.dirId === file.dirId;
+                      return (
+                        <li key={i}>
+                          <button
+                            onClick={() => loadConfig(file)}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm flex flex-col focus-ring ${isSelected ? 'bg-brand/20 text-brand' : 'text-muted hover:bg-background hover:text-foreground'}`}
+                          >
+                            <span className="font-medium truncate">{file.name}</span>
+                            <span className="text-[10px] opacity-60 truncate">{file.dirPath}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+                <div className="w-full md:w-2/3 bg-background rounded-xl border border-border p-4 flex flex-col">
+                  {selectedFile ? (
+                    <textarea
+                      value={configContent}
+                      onChange={(e) => setConfigContent(e.target.value)}
+                      className="w-full h-full bg-transparent text-foreground font-mono text-sm resize-none focus-ring p-2 rounded"
+                      spellCheck={false}
+                    />
+                  ) : (
+                    <div className="flex-1 flex items-center justify-center text-muted text-sm text-center">{t.sel}</div>
+                  )}
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* Side Panel - Right Column */}
+          <div className="col-span-1 space-y-6">
+            
+            <div className="glass-panel p-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Terminal size={20} className="text-warning" /> {t.cons}
+              </h3>
+              <div className="bg-black text-green-400 p-4 rounded-xl font-mono text-xs h-[200px] overflow-y-auto border border-border flex items-end">
+                <span className="opacity-50">{t.consDesc}</span>
+              </div>
             </div>
+
+            <div className="glass-panel p-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Upload size={20} className="text-success" /> {t.up}
+              </h3>
+              <p className="text-sm text-muted mb-4">{t.upDesc}</p>
+              <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="sr-only" accept=".vpk,.smx,.cfg" id="file-upload" />
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="w-full flex items-center justify-center gap-2 border border-dashed border-success/30 bg-success/5 hover:bg-success/10 text-success py-4 rounded-xl font-medium focus-ring"
+              >
+                <Upload size={20} /> {uploading ? t.upg : t.sel}
+              </button>
+            </div>
+
+            <div className="glass-panel p-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Users size={20} className="text-brand" /> {t.usr}
+              </h3>
+              <button className="w-full btn-secondary py-3 rounded-xl font-semibold focus-ring text-sm">
+                + {t.addU}
+              </button>
+            </div>
+
+            <div className="glass-panel p-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <MessageSquare size={20} className="text-[#5865F2]" /> {t.disc}
+              </h3>
+              <input type="text" placeholder={t.discDesc} className="w-full bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus-ring mb-3 text-foreground" />
+              <button className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white py-2 rounded-lg text-sm font-semibold focus-ring transition-colors">
+                {t.saveD}
+              </button>
+            </div>
+
           </div>
         </div>
 
-      </motion.div>
-    </main>
+      </main>
+    </div>
   );
 }
