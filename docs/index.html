@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L4D2 Server Manager | Complete Control</title>
+    <meta name="description" content="The ultimate web dashboard for managing Left 4 Dead 2 dedicated servers natively on Linux.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <header>
+        <div class="logo-container">
+            <h1>LEFT 4 DEAD 2</h1>
+            <h2 class="subtitle">SERVER MANAGER</h2>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="tagline">TAKE ABSOLUTE CONTROL.</p>
+            <p class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
+            <div class="cta-group">
+                <a href="https://github.com/howlcipher/l4d2_server_manager" class="btn btn-primary">VIEW ON GITHUB</a>
+                <a href="#features" class="btn btn-secondary">EXPLORE FEATURES</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h3>THE ARSENAL</h3>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h4>ONE-CLICK DEPLOY</h4>
+                    <p>Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🔧</div>
+                    <h4>LIVE CONFIG EDITOR</h4>
+                    <p>Edit server.cfg and all SourceMod plugin configurations in a built-in code editor. Save and apply instantly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">📦</div>
+                    <h4>VPK & MOD UPLOADER</h4>
+                    <p>Drag and drop custom maps, campaigns, and .smx plugins directly into the server's addons directory.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🔒</div>
+                    <h4>SECURE ADMIN</h4>
+                    <p>Local SQLite database with NextAuth session management keeps your server controls locked down from the horde.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="roadmap">
+            <div class="section-header">
+                <h3>INCOMING HORDE (ROADMAP)</h3>
+                <div class="divider"></div>
+            </div>
+            <ul class="roadmap-list">
+                <li><span class="status">Incoming</span> Live Server Console & Chat Streaming</li>
+                <li><span class="status">Incoming</span> Multi-user Sub-admin Management</li>
+                <li><span class="status">Incoming</span> Automated SteamCMD Updates</li>
+                <li><span class="status">Incoming</span> Discord Webhook Integration</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation.</p>
+    </footer>
+
+</body>
+</html>
