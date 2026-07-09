@@ -130,7 +130,52 @@
         <p id="footer-text">Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation.</p>
         <div class="hit-counter">
             <p>You are survivor number:</p>
-            <img src="https://counter8.optie.net/private/freecounterstat.php?c=howlcipher_l4d2_manager" alt="Hit Counter">
+            <style>
+            .odometer {
+                display: inline-block;
+                background: black;
+                border: 3px inset #555;
+                padding: 2px;
+            }
+            .digit {
+                display: inline-block;
+                background: #111;
+                color: #0f0;
+                font-family: "Courier New", Courier, monospace;
+                font-size: 24px;
+                font-weight: bold;
+                padding: 2px 5px;
+                margin: 0 1px;
+                border: 1px solid #333;
+            }
+            </style>
+            <div class="odometer" id="fake-hit-counter">
+                <span class="digit">0</span>
+                <span class="digit">1</span>
+                <span class="digit">0</span>
+                <span class="digit">5</span>
+                <span class="digit">3</span>
+                <span class="digit">2</span>
+                <span class="digit">8</span>
+            </div>
+            <script>
+                let hits = localStorage.getItem('l4d2_hits');
+                if (!hits) hits = Math.floor(Math.random() * 50000) + 1000000;
+                hits = parseInt(hits) + 1;
+                localStorage.setItem('l4d2_hits', hits);
+                
+                const hitStr = hits.toString().padStart(7, '0');
+                const counterDiv = document.getElementById('fake-hit-counter');
+                if (counterDiv) {
+                    counterDiv.innerHTML = '';
+                    for (let char of hitStr) {
+                        let span = document.createElement('span');
+                        span.className = 'digit';
+                        span.innerText = char;
+                        counterDiv.appendChild(span);
+                    }
+                }
+            </script>
         </div>
         <hr color="red" size="5">
     </footer>
