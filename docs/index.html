@@ -10,11 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-mode">
-    <div class="overlay"></div>
-    <div class="scanlines"></div>
     
     <div class="top-bar">
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">🌞</button>
         <select id="lang-select" aria-label="Select Language">
             <option value="en">🇺🇸 English</option>
             <option value="es">🇪🇸 Español (Spanish)</option>
@@ -30,19 +27,21 @@
 
     <header>
         <div class="logo-container">
+            <img src="logo.jpg" alt="Zombie Hand Logo" class="geocities-logo">
             <h1 id="title-main">LEFT 4 DEAD 2</h1>
             <h2 id="title-sub" class="subtitle">SERVER MANAGER</h2>
         </div>
     </header>
 
     <main>
+        <marquee direction="right" scrollamount="12">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
         <section class="hero">
             <p id="hero-tagline" class="tagline">TAKE ABSOLUTE CONTROL.</p>
             <p id="hero-desc" class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
             <div class="cta-group">
                 <a id="btn-github" href="https://github.com/howlcipher/l4d2_server_manager" class="btn btn-primary">VIEW ON GITHUB</a>
-                <a id="btn-features" href="#features" class="btn btn-secondary">EXPLORE FEATURES</a>
             </div>
+            <img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/underconstruction.gif" alt="Under Construction">
         </section>
 
         <section id="features" class="features-section">
@@ -94,6 +93,11 @@
 
     <footer>
         <p id="footer-text">Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation.</p>
+        <div class="hit-counter">
+            <p>You are survivor number:</p>
+            <img src="https://counter8.optie.net/private/freecounterstat.php?c=geocities" alt="Hit Counter">
+        </div>
+        <hr color="red" size="5">
     </footer>
 
     <script>
