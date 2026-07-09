@@ -11,9 +11,12 @@
 </head>
 <body class="dark-mode">
     <bgsound src="https://bitmidi.com/uploads/16279.mid" loop="infinite">
-    <audio autoplay loop style="display:none;" id="bgm">
-        <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi">
-    </audio>
+    <div style="text-align: center; margin-top: 10px;">
+        <p><blink><font color="yellow" size="4">LAST UPDATED: OCTOBER 31, 1999</font></blink></p>
+        <audio controls autoplay loop id="bgm" style="border: 3px ridge red;">
+            <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi">
+        </audio>
+    </div>
 
     <div class="top-bar">
         <span class="flag-btn" data-lang="en">🇺🇸</span>
@@ -35,70 +38,76 @@
         </div>
     </header>
 
-    <main>
-        <marquee direction="right" scrollamount="12">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
-        
-        <div id="ip-grabber" class="ip-grabber">
-            <p><blink>⚠️ INTRUDER ALERT ⚠️</blink></p>
-            <p>WE ARE TRACKING YOU. YOUR IP IS: <span id="user-ip">LOCATING...</span></p>
-            <p>BROWSER: <span id="user-browser"></span></p>
-            <p>THE HORDE IS ON ITS WAY...</p>
-        </div>
+    <table border="5" cellpadding="15" cellspacing="5" bordercolor="#00ff00" bgcolor="#111111" align="center" width="85%">
+        <tr>
+            <td>
+                <main>
+                    <marquee direction="right" scrollamount="12">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
+                    
+                    <div id="ip-grabber" class="ip-grabber">
+                        <p><blink>⚠️ INTRUDER ALERT ⚠️</blink></p>
+                        <p>WE ARE TRACKING YOU. YOUR IP IS: <span id="user-ip">LOCATING...</span></p>
+                        <p>BROWSER: <span id="user-browser"></span></p>
+                        <p>THE HORDE IS ON ITS WAY...</p>
+                    </div>
 
-        <section class="hero">
-            <p id="hero-tagline" class="tagline">TAKE ABSOLUTE CONTROL.</p>
-            <p id="hero-desc" class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
-            <div class="cta-group">
-                <a id="btn-github" href="https://github.com/howlcipher/l4d2_server_manager" class="btn btn-primary">VIEW ON GITHUB</a>
-            </div>
-            <img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/underconstruction.gif" alt="Under Construction">
-        </section>
+                    <section class="hero">
+                        <p id="hero-tagline" class="tagline">TAKE ABSOLUTE CONTROL.</p>
+                        <p id="hero-desc" class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
+                        <div class="cta-group">
+                            <a id="btn-github" href="https://github.com/howlcipher/l4d2_server_manager" class="btn btn-primary">VIEW ON GITHUB</a>
+                        </div>
+                        <img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/underconstruction.gif" alt="Under Construction">
+                    </section>
 
-        <section id="features" class="features-section">
-            <div class="section-header">
-                <h3 id="feat-title">THE ARSENAL</h3>
-                <div class="divider"></div>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h4 id="feat-1-title">ONE-CLICK DEPLOY</h4>
-                    <p id="feat-1-desc">Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">🔧</div>
-                    <h4 id="feat-2-title">LIVE CONFIG EDITOR</h4>
-                    <p id="feat-2-desc">Edit server.cfg and all SourceMod plugin configurations in a built-in code editor. Save and apply instantly.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">📦</div>
-                    <h4 id="feat-3-title">VPK & MOD UPLOADER</h4>
-                    <p id="feat-3-desc">Drag and drop custom maps, campaigns, and .smx plugins directly into the server's addons directory.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">🔒</div>
-                    <h4 id="feat-4-title">SECURE ADMIN</h4>
-                    <p id="feat-4-desc">Local SQLite database with NextAuth session management keeps your server controls locked down from the horde.</p>
-                </div>
-            </div>
-        </section>
+                    <section id="features" class="features-section">
+                        <div class="section-header">
+                            <h3 id="feat-title">THE ARSENAL</h3>
+                            <div class="divider"></div>
+                        </div>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/linux.gif" alt="Deploy"></div>
+                                <h4 id="feat-1-title">ONE-CLICK DEPLOY</h4>
+                                <p id="feat-1-desc">Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/notepad.gif" alt="Editor"></div>
+                                <h4 id="feat-2-title">LIVE CONFIG EDITOR</h4>
+                                <p id="feat-2-desc">Edit server.cfg and all SourceMod plugin configurations in a built-in code editor. Save and apply instantly.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/winzip.gif" alt="Zip"></div>
+                                <h4 id="feat-3-title">VPK & MOD UPLOADER</h4>
+                                <p id="feat-3-desc">Drag and drop custom maps, campaigns, and .smx plugins directly into the server's addons directory.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/pgpi.gif" alt="Secure"></div>
+                                <h4 id="feat-4-title">SECURE ADMIN</h4>
+                                <p id="feat-4-desc">Local SQLite database with NextAuth session management keeps your server controls locked down from the horde.</p>
+                            </div>
+                        </div>
+                    </section>
 
-        <section class="roadmap">
-            <div class="section-header">
-                <h3 id="road-title">NEW FEATURES INCLUDED</h3>
-            </div>
-            <ul class="roadmap-list">
-                <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-1-badge">Live</span> <span id="road-1">Live Server Console & Chat Streaming</span></li>
-                <li><img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/hot.gif" alt="HOT"> <span class="status status-done" id="stat-2-badge">Live</span> <span id="road-2">Multi-user Sub-admin Management</span></li>
-                <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-3-badge">Live</span> <span id="road-3">Automated SteamCMD Updates</span></li>
-                <li><span class="status status-done" id="stat-4-badge">Live</span> <span id="road-4">Discord Webhook Integration</span></li>
-            </ul>
-        </section>
-    </main>
+                    <section class="roadmap">
+                        <div class="section-header">
+                            <h3 id="road-title">NEW FEATURES INCLUDED</h3>
+                        </div>
+                        <ul class="roadmap-list">
+                            <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-1-badge">Live</span> <span id="road-1">Live Server Console & Chat Streaming</span></li>
+                            <li><img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/hot.gif" alt="HOT"> <span class="status status-done" id="stat-2-badge">Live</span> <span id="road-2">Multi-user Sub-admin Management</span></li>
+                            <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-3-badge">Live</span> <span id="road-3">Automated SteamCMD Updates</span></li>
+                            <li><span class="status status-done" id="stat-4-badge">Live</span> <span id="road-4">Discord Webhook Integration</span></li>
+                        </ul>
+                    </section>
+                </main>
+            </td>
+        </tr>
+    </table>
 
     <footer>
         <div style="text-align: center; margin-bottom: 20px;">
