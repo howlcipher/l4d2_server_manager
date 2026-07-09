@@ -1,6 +1,6 @@
 # L4D2 Server Manager
 
-![L4D2 Manager](docs/hero-bg.jpg)
+![L4D2 Manager](docs/og-image.jpg)
 
 A modern, highly-customizable web dashboard for deploying and managing Left 4 Dead 2 dedicated servers natively on Linux. Built with **Next.js**, **Tailwind CSS**, and **Prisma**, this tool gives you absolute control over your server without ever needing to touch the terminal.
 
@@ -11,6 +11,11 @@ A modern, highly-customizable web dashboard for deploying and managing Left 4 De
 - **VPK & Mod Uploader:** Upload custom maps, campaigns, and `.smx` plugins with a drag-and-drop interface.
 - **Secure Admin Dashboard:** NextAuth session management with SQLite ensures your server is locked down.
 - **Roadmap Ready:** UI scaffolding is live for Server Console streaming, Discord Webhooks, Auto-Updates, and Sub-Admin Management (Backend APIs coming soon).
+
+## 📸 Screenshots
+
+### The Web Dashboard
+![Web UI Screenshot](docs/screenshot.jpg)
 
 ## 🛠 Planned Features
 - Real-time Server Console streaming
