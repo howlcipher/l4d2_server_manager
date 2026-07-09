@@ -143,3 +143,10 @@ a, button, select, input {
   white-space: nowrap;
   border-width: 0;
 }
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.blink {
+  animation: blink 1s step-start infinite;
+}

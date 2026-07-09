@@ -285,7 +285,7 @@ export default function Home() {
       </a>
 
       <div style={{ textAlign: "center", marginTop: "10px", width: "100%" }}>
-        <p><blink><font color="yellow" size={4}>LAST UPDATED: JULY 09, 2026</font></blink></p>
+        <p><span className="blink" style={{ color: "yellow", fontSize: "1.2rem" }}>LAST UPDATED: JULY 09, 2026</span></p>
         <audio controls autoPlay loop id="bgm" style={{ border: "3px ridge red", margin: "0 auto", display: "inline-block" }}>
           <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi" />
         </audio>
