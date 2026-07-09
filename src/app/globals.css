@@ -66,42 +66,65 @@
 }
 
 @layer utilities {
-  .focus-ring {
-    @apply focus:outline-none focus-visible:ring-4 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-shadow;
+  .focus-ring:focus {
+    outline: 2px dashed red;
+    outline-offset: 2px;
   }
 }
 
 body {
+  font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive !important;
   background-color: var(--bg-primary);
+  background-image: url('/bg.jpg');
+  background-attachment: fixed;
   color: var(--text-primary);
+  cursor: url('https://cur.cursors-4u.net/blood/blo-1/blo18.cur'), auto;
+}
+
+a, button, select, input {
+  cursor: url('https://cur.cursors-4u.net/blood/blo-1/blo15.cur'), pointer !important;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 2px solid #00ff00;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border: 3px outset #ffaaaa;
+}
+::-webkit-scrollbar-corner {
+  background: #000;
 }
 
 .glass-panel {
   background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  border-radius: 1.5rem;
+  border: 5px ridge var(--color-success);
+  border-radius: 0;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary {
   background: var(--color-brand);
   color: #fff;
-  border: 1px solid transparent;
+  border: 3px outset #ffaaaa;
   transition: all 0.2s ease-in-out;
+  border-radius: 0 !important;
 }
 
 .btn-primary:hover {
   filter: brightness(1.1);
-  box-shadow: 0 0 20px var(--color-brand);
 }
 
 .btn-secondary {
-  background: transparent;
+  background: #222;
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  border: 3px outset #aaa;
   transition: all 0.2s ease-in-out;
+  border-radius: 0 !important;
 }
 
 .btn-secondary:hover {

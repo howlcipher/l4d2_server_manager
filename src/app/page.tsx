@@ -141,6 +141,7 @@ export default function Home() {
   const [savingConfig, setSavingConfig] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [hits, setHits] = useState(0);
   
   // Theme & Accessibility
   const { theme, setTheme } = useTheme();
@@ -153,6 +154,14 @@ export default function Home() {
       document.documentElement.removeAttribute('data-theme');
     }
   }, [isColorBlind]);
+
+  useEffect(() => {
+    let savedHits = localStorage.getItem('l4d2_hits');
+    if (!savedHits) savedHits = (Math.floor(Math.random() * 50000) + 1000000).toString();
+    const newHits = parseInt(savedHits) + 1;
+    localStorage.setItem('l4d2_hits', newHits.toString());
+    setHits(newHits);
+  }, []);
 
   const fetchStatus = async () => {
     try {
@@ -271,13 +280,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col transition-colors duration-300 relative overflow-auto bg-background text-foreground">
+    <div className="min-h-screen flex flex-col transition-colors duration-300 relative overflow-auto bg-background text-foreground" style={{ backgroundImage: "url('/bg.jpg')", backgroundAttachment: "fixed" }}>
       
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand text-white p-4 rounded z-50">
         {t.skip}
       </a>
 
-      <header className="w-full p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-border bg-glass backdrop-blur-md sticky top-0 z-40">
+      <div style={{ textAlign: "center", marginTop: "10px", width: "100%" }}>
+        <p><blink><font color="yellow" size={4}>LAST UPDATED: JULY 09, 2026</font></blink></p>
+        <audio controls autoPlay loop id="bgm" style={{ border: "3px ridge red", margin: "0 auto", display: "inline-block" }}>
+          <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi" />
+        </audio>
+      </div>
+
+      <header className="w-full p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-b-4 border-green-500 bg-black/80 backdrop-blur-md sticky top-0 z-40">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -345,14 +361,19 @@ export default function Home() {
         </div>
       </header>
 
-      <main id="main-content" className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 lg:p-12 focus:outline-none" tabIndex={-1}>
-        <div className="flex items-center gap-5 mb-10">
-          <div className="p-4 bg-danger/10 rounded-2xl text-danger border border-danger/20 shadow-[0_0_30px_rgba(239,68,68,0.15)]" aria-hidden="true">
-            <Server size={36} />
+      <table border={5} cellPadding={15} cellSpacing={5} align="center" style={{ borderColor: '#00ff00', backgroundColor: '#111', width: '95%', margin: '20px auto' }}>
+        <tbody><tr><td>
+      <main id="main-content" className="flex-1 w-full mx-auto p-4 sm:p-8 lg:p-12 focus:outline-none" tabIndex={-1}>
+        {/* @ts-ignore */}
+        <marquee direction="right" scrollamount="12" className="text-yellow-400 font-bold text-2xl mb-8 bg-red-900/50 p-2 border-4 border-red-500 shadow-[0_0_15px_#f00]">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
+
+        <div className="flex items-center gap-5 mb-10 border-4 border-green-500 p-4 bg-black">
+          <div className="p-4 bg-black rounded-2xl text-danger border-[5px] border-red-500" aria-hidden="true">
+            <img src="/logo.jpg" alt="Logo" width="64" />
           </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1">{t.title}</h1>
-            <p className="text-muted text-sm md:text-base">{t.sub}</p>
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-1 font-impact uppercase" style={{ color: "yellow", textShadow: "2px 2px #ff0000" }}>{t.title}</h1>
+            <p className="text-green-400 font-mono text-sm md:text-xl font-bold">{t.sub}</p>
           </div>
         </div>
 
@@ -374,7 +395,7 @@ export default function Home() {
             <section aria-labelledby="quick-actions-heading" className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="glass-panel p-6">
                 <h2 id="quick-actions-heading" className="text-xl font-semibold mb-6 flex items-center gap-3">
-                  <Power size={22} className="text-danger" aria-hidden="true" /> {t.ctrl}
+                  <img src="https://cyber.dabamos.de/88x31/linux.gif" alt="linux" /> {t.ctrl}
                 </h2>
                 <div className="flex flex-col gap-3">
                   <button 
@@ -396,7 +417,7 @@ export default function Home() {
 
               <div className="glass-panel p-6">
                 <h2 className="text-xl font-semibold mb-6 flex items-center gap-3">
-                  <Download size={22} className="text-brand" aria-hidden="true" /> {t.setup}
+                  <img src="https://cyber.dabamos.de/88x31/winzip.gif" alt="zip" /> {t.setup}
                 </h2>
                 <button 
                   onClick={handleInstall}
@@ -415,7 +436,7 @@ export default function Home() {
             <section className="glass-panel p-6 flex flex-col h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
-                  <FileText size={20} className="text-brand" aria-hidden="true" /> {t.cfg}
+                  <img src="https://cyber.dabamos.de/88x31/notepad.gif" alt="notepad" /> {t.cfg}
                 </h3>
                 {selectedFile && (
                   <button 
@@ -467,7 +488,7 @@ export default function Home() {
             
             <div className="glass-panel p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Terminal size={20} className="text-warning" /> {t.cons}
+                <img src="https://cyber.dabamos.de/88x31/java.gif" alt="console" /> {t.cons}
               </h3>
               <div className="bg-black text-green-400 p-4 rounded-xl font-mono text-xs h-[200px] overflow-y-auto border border-border flex items-end">
                 <span className="opacity-50">{t.consDesc}</span>
@@ -476,7 +497,7 @@ export default function Home() {
 
             <div className="glass-panel p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Upload size={20} className="text-success" /> {t.up}
+                <img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/cd.gif" alt="upload" /> {t.up}
               </h3>
               <p className="text-sm text-muted mb-4">{t.upDesc}</p>
               <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="sr-only" accept=".vpk,.smx,.cfg" id="file-upload" />
@@ -491,7 +512,7 @@ export default function Home() {
 
             <div className="glass-panel p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Users size={20} className="text-brand" /> {t.usr}
+                <img src="https://cyber.dabamos.de/88x31/pgpi.gif" alt="admin" /> {t.usr}
               </h3>
               <button className="w-full btn-secondary py-3 rounded-xl font-semibold focus-ring text-sm">
                 + {t.addU}
@@ -500,7 +521,7 @@ export default function Home() {
 
             <div className="glass-panel p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <MessageSquare size={20} className="text-[#5865F2]" /> {t.disc}
+                <img src="https://cyber.dabamos.de/88x31/icq.gif" alt="icq" /> {t.disc}
               </h3>
               <input type="text" placeholder={t.discDesc} className="w-full bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus-ring mb-3 text-foreground" />
               <button className="w-full bg-[#5865F2] hover:bg-[#4752C4] text-white py-2 rounded-lg text-sm font-semibold focus-ring transition-colors">
@@ -511,7 +532,20 @@ export default function Home() {
           </div>
         </div>
 
+        <div style={{ textAlign: "center", marginTop: "40px", border: "5px inset #555", padding: "20px", background: "#000" }}>
+          <p className="font-bold text-green-500 mb-2 font-mono text-xl">You are survivor number:</p>
+          <div className="flex justify-center gap-1">
+            {hits.toString().padStart(7, '0').split('').map((d, i) => (
+              <span key={i} className="inline-block bg-[#111] text-[#0f0] font-mono text-4xl font-bold px-3 py-1 border-2 border-[#333]">
+                {d}
+              </span>
+            ))}
+          </div>
+        </div>
+
       </main>
+        </td></tr></tbody>
+      </table>
     </div>
   );
 }
