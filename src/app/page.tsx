@@ -304,15 +304,15 @@ export default function Home() {
               className="bg-transparent text-sm font-medium focus-ring focus:outline-none"
               aria-label="Select Language"
             >
-              <option value="en">English</option>
-              <option value="es">Español</option>
-              <option value="ru">Русский</option>
-              <option value="zh">中文</option>
-              <option value="de">Deutsch</option>
-              <option value="fi">Suomi</option>
-              <option value="hi">हिन्दी</option>
-              <option value="pl">Polski</option>
-              <option value="ja">日本語</option>
+              <option value="en">🇺🇸 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="ru">🇷🇺 Русский</option>
+              <option value="zh">🇨🇳 中文</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="fi">🇫🇮 Suomi</option>
+              <option value="hi">🇮🇳 हिन्दी</option>
+              <option value="pl">🇵🇱 Polski</option>
+              <option value="ja">🇯🇵 日本語</option>
             </select>
           </div>
         </div>

@@ -4,13 +4,13 @@
 
 A modern, highly-customizable web dashboard for deploying and managing Left 4 Dead 2 dedicated servers natively on Linux. Built with **Next.js**, **Tailwind CSS**, and **Prisma**, this tool gives you absolute control over your server without ever needing to touch the terminal.
 
-## 🧟 Features
-
-- **One-Click Installation:** Automatically downloads SteamCMD, installs the L4D2 dedicated server, and sets up SourceMod and Metamod.
-- **Server Power Control:** Start, stop, and monitor the running state of your server directly from the browser.
-- **Mod & VPK Uploader:** Drag-and-drop support for `.vpk` files (campaigns, maps) and `.smx` (SourceMod plugins). They are automatically moved to the correct `addons` folders.
-- **Live Config Editor:** Modify `server.cfg`, `sourcemod.cfg`, and any other generated plugin configuration files from a built-in text editor.
-- **Local Authentication:** Secured out of the box with a local SQLite database. The first user to register becomes the Admin and locks the registration gate. (Default: `admin` / `123`)
+## ✨ Features
+- **One-Click Deploy:** Automated `setup.sh` script installs everything (Node.js, SteamCMD, dependencies) for absolute beginners.
+- **Global Accessibility:** Built-in support for 9 languages 🇺🇸🇪🇸🇷🇺🇨🇳🇩🇪🇫🇮🇮🇳🇵🇱🇯🇵, seamless Light/Dark modes, and high-contrast Color-Blind mode.
+- **Live Config Editor:** Edit `server.cfg` and SourceMod configurations directly in the browser.
+- **VPK & Mod Uploader:** Upload custom maps, campaigns, and `.smx` plugins with a drag-and-drop interface.
+- **Secure Admin Dashboard:** NextAuth session management with SQLite ensures your server is locked down.
+- **Roadmap Ready:** UI scaffolding is live for Server Console streaming, Discord Webhooks, Auto-Updates, and Sub-Admin Management (Backend APIs coming soon).
 
 ## 🛠 Planned Features
 - Real-time Server Console streaming
