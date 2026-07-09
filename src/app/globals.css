@@ -1,58 +1,122 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  :root {
+    /* Light theme (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-glass: rgba(255, 255, 255, 0.8);
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --border-color: rgba(0, 0, 0, 0.1);
+    
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+    --color-brand: #3b82f6;
+  }
+
+  .dark {
+    /* Dark theme */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #171717;
+    --bg-glass: rgba(20, 20, 20, 0.6);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+    --color-brand: #60a5fa;
+  }
+
+  /* Color Blind Mode Overrides */
+  [data-theme='color-blind'] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-glass: rgba(255, 255, 255, 0.8);
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --border-color: rgba(0, 0, 0, 0.1);
+
+    /* High contrast / color blind safe status colors (Blue/Orange/Yellow) */
+    --color-success: #2563eb; /* Blue instead of Green */
+    --color-danger: #d97706;  /* Orange/Brown instead of Red */
+    --color-warning: #facc15; /* High contrast Yellow */
+    --color-brand: #4f46e5;
+  }
+
+  [data-theme='color-blind'].dark, 
+  .dark[data-theme='color-blind'] {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #171717;
+    --bg-glass: rgba(20, 20, 20, 0.6);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    --color-success: #3b82f6; 
+    --color-danger: #f59e0b;  
+    --color-warning: #fde047; 
+    --color-brand: #818cf8;
+  }
 }
 
-:root {
-  --background: #0a0a0f;
-  --foreground: #f8fafc;
-  --primary: #ef4444; 
-  --primary-hover: #dc2626;
-  --surface: rgba(20, 20, 30, 0.6);
-  --surface-hover: rgba(30, 30, 45, 0.8);
-  --border: rgba(255, 255, 255, 0.08);
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-4 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-shadow;
+  }
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(239, 68, 68, 0.08), transparent 35%),
-    radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.08), transparent 35%);
-  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .glass-panel {
-  background: var(--surface);
+  background: var(--bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: white;
-  transition: all 0.2s ease;
+  background: var(--color-brand);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  filter: brightness(1.1);
+  box-shadow: 0 0 20px var(--color-brand);
 }
 
 .btn-secondary {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--foreground);
-  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-secondary:hover {
-  background: var(--surface-hover);
-  transform: translateY(-2px);
+  background: var(--bg-secondary);
+}
+
+/* Accessibility for screen readers only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

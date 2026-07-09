@@ -40,63 +40,61 @@ export default function Register() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-6">
+    <main className="min-h-screen flex items-center justify-center p-4 bg-background text-foreground">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-md glass-panel p-8"
       >
         <div className="text-center mb-8">
-          <div className="inline-flex p-3 bg-blue-500/10 rounded-full text-blue-400 mb-4">
-            <UserPlus size={32} />
+          <div className="inline-flex p-4 bg-danger/10 rounded-full text-danger border border-danger/20 mb-4">
+            <Server size={32} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-100">Create Admin Account</h1>
-          <p className="text-gray-400 mt-1">First-time Setup</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">System Init</h1>
+          <p className="text-muted mt-2">Create the master admin account</p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm text-center">
-            {error}
+          <div className="mb-6 p-4 bg-danger/10 border border-danger/20 text-danger rounded-xl text-sm font-medium flex items-center gap-2">
+            <ShieldAlert size={18} /> {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <div className="relative">
-              <User className="absolute left-3 top-3 text-gray-500" size={18} />
-              <input 
-                type="text" 
-                placeholder="Username" 
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-gray-100 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all"
-                required
-              />
-            </div>
+            <label className="block text-sm font-medium text-muted mb-2">Admin Username</label>
+            <input 
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-foreground focus-ring placeholder-muted transition-colors"
+              placeholder="Enter username"
+              required
+            />
           </div>
           <div>
-            <div className="relative">
-              <Lock className="absolute left-3 top-3 text-gray-500" size={18} />
-              <input 
-                type="password" 
-                placeholder="Password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-gray-100 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all"
-                required
-              />
-            </div>
+            <label className="block text-sm font-medium text-muted mb-2">Secure Password</label>
+            <input 
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-secondary border border-border rounded-xl px-4 py-3 text-foreground focus-ring placeholder-muted transition-colors"
+              placeholder="••••••••"
+              required
+            />
           </div>
+          
           <button 
-            type="submit" 
+            type="submit"
             disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-semibold tracking-wide disabled:opacity-50 mt-4 transition-all"
+            className="w-full btn-primary py-3.5 rounded-xl font-semibold tracking-wide disabled:opacity-50 mt-4 focus-ring"
           >
-            {loading ? 'Creating...' : 'Register'}
+            {loading ? 'Creating Account...' : 'Register Admin'}
           </button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-400">
-          Already registered? <Link href="/login" className="text-blue-400 hover:text-blue-300">Login here</Link>
+        <div className="mt-6 text-center text-sm text-muted">
+          Already have an account? <Link href="/login" className="text-brand hover:underline font-medium focus-ring rounded">Login</Link>
         </div>
       </motion.div>
     </main>

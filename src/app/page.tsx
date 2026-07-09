@@ -20,6 +20,58 @@ const i18n: Record<string, Record<string, string>> = {
     usr: "Admin Management", addU: "Add Sub-Admin",
     logout: "Logout", cb: "Color Blind Mode"
   },
+  es: {
+    title: "Gestor L4D2", sub: "Controlador de Servidor y Mods", skip: "Saltar al contenido principal",
+    ctrl: "Control del Servidor", start: "Iniciar Servidor", stop: "Detener Servidor",
+    setup: "Configuración Inicial", install: "Instalar Servidor",
+    up: "Subir Mods", upDesc: "Sube campañas personalizadas y plugins.",
+    sel: "Seleccionar Archivo", upg: "Subiendo...",
+    cfg: "Editor de Configuración", save: "Guardar", svg: "Guardando...",
+    cons: "Consola en Vivo", consDesc: "La consola aparecerá aquí...",
+    disc: "Webhook de Discord", discDesc: "Introduce la URL del Webhook", saveD: "Guardar",
+    upd: "Actualizaciones", runUpd: "Actualizar vía SteamCMD",
+    usr: "Gestión de Administradores", addU: "Añadir Administrador",
+    logout: "Cerrar Sesión", cb: "Modo Daltónico"
+  },
+  ru: {
+    title: "Менеджер L4D2", sub: "Управление сервером", skip: "Перейти к контенту",
+    ctrl: "Управление", start: "Запустить сервер", stop: "Остановить сервер",
+    setup: "Установка", install: "Установить сервер",
+    up: "Загрузка модов", upDesc: "Загрузите пользовательские карты и плагины.",
+    sel: "Выбрать файл", upg: "Загрузка...",
+    cfg: "Редактор конфигов", save: "Сохранить", svg: "Сохранение...",
+    cons: "Живая консоль", consDesc: "Здесь будет консоль...",
+    disc: "Discord Webhook", discDesc: "Введите URL Webhook", saveD: "Сохранить",
+    upd: "Обновления", runUpd: "Обновить через SteamCMD",
+    usr: "Управление админами", addU: "Добавить админа",
+    logout: "Выйти", cb: "Режим для дальтоников"
+  },
+  zh: {
+    title: "L4D2管理器", sub: "自定义服务器控制器", skip: "跳到主要内容",
+    ctrl: "服务器控制", start: "启动服务器", stop: "停止服务器",
+    setup: "初始设置", install: "安装服务器",
+    up: "MOD上传", upDesc: "上传自定义战役和插件。",
+    sel: "选择文件", upg: "上传中...",
+    cfg: "配置编辑器", save: "保存", svg: "保存中...",
+    cons: "实时控制台", consDesc: "控制台流将显示在这里...",
+    disc: "Discord Webhook", discDesc: "输入Webhook URL", saveD: "保存",
+    upd: "服务器更新", runUpd: "通过SteamCMD更新",
+    usr: "管理员管理", addU: "添加管理员",
+    logout: "登出", cb: "色盲模式"
+  },
+  de: {
+    title: "L4D2-Manager", sub: "Server-Controller", skip: "Zum Hauptinhalt springen",
+    ctrl: "Serversteuerung", start: "Server starten", stop: "Server stoppen",
+    setup: "Ersteinrichtung", install: "Server installieren",
+    up: "Mod Upload", upDesc: "Lade Kampagnen und Plugins hoch.",
+    sel: "Datei auswählen", upg: "Wird hochgeladen...",
+    cfg: "Konfigurationseditor", save: "Speichern", svg: "Wird gespeichert...",
+    cons: "Live-Konsole", consDesc: "Konsolen-Stream erscheint hier...",
+    disc: "Discord Webhook", discDesc: "Webhook-URL eingeben", saveD: "Speichern",
+    upd: "Updates", runUpd: "Über SteamCMD aktualisieren",
+    usr: "Benutzerverwaltung", addU: "Admin hinzufügen",
+    logout: "Abmelden", cb: "Farbenblind-Modus"
+  },
   fi: {
     title: "L4D2-hallinta", sub: "Mukautettu palvelin", skip: "Siirry sisältöön",
     ctrl: "Palvelimen hallinta", start: "Käynnistä", stop: "Sammuta",
@@ -253,6 +305,10 @@ export default function Home() {
               aria-label="Select Language"
             >
               <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="ru">Русский</option>
+              <option value="zh">中文</option>
+              <option value="de">Deutsch</option>
               <option value="fi">Suomi</option>
               <option value="hi">हिन्दी</option>
               <option value="pl">Polski</option>
