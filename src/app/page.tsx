@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { signOut } from 'next-auth/react';
-import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
-import { Server, Power, Play, Settings, Download, LogOut, Upload, FileText, Save, Moon, Sun, Eye, Terminal, MessageSquare, Users, RefreshCw, Globe } from 'lucide-react';
+import { Server, Power, Play, Settings, Download, LogOut, Upload, FileText, Save, Eye, Terminal, MessageSquare, Users, RefreshCw, Globe } from 'lucide-react';
 
 const i18n: Record<string, Record<string, string>> = {
   en: {
@@ -144,7 +143,6 @@ export default function Home() {
   const [hits, setHits] = useState(0);
   
   // Theme & Accessibility
-  const { theme, setTheme } = useTheme();
   const [isColorBlind, setIsColorBlind] = useState(false);
 
   useEffect(() => {
@@ -295,13 +293,6 @@ export default function Home() {
 
       <header className="w-full p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-b-4 border-green-500 bg-black/80 backdrop-blur-md sticky top-0 z-40">
         <div className="flex items-center gap-4">
-          <button 
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full hover:bg-secondary focus-ring transition-colors"
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
           
           <button 
             onClick={() => setIsColorBlind(!isColorBlind)}
