@@ -204,6 +204,10 @@ marquee {
     margin: 0 0 10px 0;
 }
 
+.feature-ca:hover {
+    color: #ff0000;
+}
+
 .feature-card p {
     color: #fff;
     font-size: 16px;

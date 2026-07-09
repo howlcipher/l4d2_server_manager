@@ -37,10 +37,17 @@
       <p style="color: #00ff00; font-size: 14px; margin-top: 10px;">To install, just run: <code>chmod +x l4d2-manager-linux-amd64 && ./l4d2-manager-linux-amd64 install</code></p>
     </div>
     <div style="text-align: center; margin-top: 10px;">
-        <p><blink><font color="yellow" size="4">LAST UPDATED: JULY 09, 2026</font></blink></p>
-        <audio controls autoplay loop id="bgm" style="border: 3px ridge red;">
-            <source src="https://bitmidi.com/uploads/16279.mid" type="audio/midi">
-        </audio>
+        <p><span class="blink" style="color: yellow; font-size: 1.2rem;">LAST UPDATED: JULY 09, 2026</span></p>
+        
+        <!-- Modern MIDI Player Polyfill -->
+        <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+        <midi-player
+          src="https://bitmidi.com/uploads/16279.mid"
+          autoplay
+          sound-font
+          style="border: 3px ridge red; margin: 0 auto; display: block; width: 300px; background: #000;"
+        ></midi-player>
+        <p style="color: #ffaaaa; font-size: 12px; margin-top: 5px;">(Note: You may need to press Play due to modern browser autoplay rules!)</p>
     </div>
 
     <div class="top-bar">
