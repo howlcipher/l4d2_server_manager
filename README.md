@@ -82,5 +82,8 @@ npm run test
 *   **`cron.js`**: The background worker for automation.
 *   **`docs/`**: The 16-bit retro GitHub Pages landing site.
 
+## 🙏 Acknowledgements & Credits
+A special thank you and credit goes out to [Satanic-Spirit](https://github.com/Satanic-Spirit) for their incredible work and foundational code, which was forked and utilized as a base for many of the plugins and configurations in this manager.
+
 ## 📝 License
 MIT License. Created for the L4D2 Modding Community.
