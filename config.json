@@ -1,0 +1,45 @@
+{
+  "source_directory": "..",
+  "build_directory": "bundled_mods",
+  "modules": {
+    "extensions": {
+      "sources": [
+        "Tickrate-Enabler",
+        "L4DToolz",
+        "Left4Downtown2",
+        "left4downtown0.5.4.2",
+        "BulldozerChargers",
+        "Collisionhook"
+      ],
+      "target_dir": "addons/sourcemod/extensions",
+      "file_types": ["*.so", "*.vdf"]
+    },
+    "plugins": {
+      "sources": [
+        "l4d2_customized/compiled",
+        "Random-Plugins",
+        "l4d2_bugfixes",
+        "Pounce-Damage-Uncap",
+        "l4d2-Melee-Spawn-Control",
+        "LadderRambos",
+        "defib-fix"
+      ],
+      "target_dir": "addons/sourcemod/plugins",
+      "file_types": ["*.smx"]
+    },
+    "configs": {
+      "sources": [
+        "l4d2_customized/configs"
+      ],
+      "target_dir": "cfg/sourcemod",
+      "file_types": ["*.cfg"]
+    },
+    "vscripts": {
+      "sources": [
+        "vscripts"
+      ],
+      "target_dir": "scripts/vscripts",
+      "file_types": ["*.nut"]
+    }
+  }
+}
