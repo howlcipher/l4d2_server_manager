@@ -1,5 +1,14 @@
 # L4D2 Server Manager & Builder
 
+<div align="center">
+  <img src="https://img.shields.io/github/package-json/v/howlcipher/l4d2_server_manager?color=red&style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+  <img src="https://img.shields.io/github/license/howlcipher/l4d2_server_manager?color=green&style=for-the-badge" alt="License" />
+</div>
+
 The ultimate, all-in-one suite for deploying, configuring, and managing Left 4 Dead 2 dedicated servers on Linux. 
 
 This project combines a **Next.js Web Dashboard** with a **Pre-bundled Mod Architecture**, meaning you can deploy a fully competitive, highly customized server with a single click.
