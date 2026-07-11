@@ -22,44 +22,57 @@ This project combines a **Next.js Web Dashboard** with a **Pre-bundled Mod Archi
 *   **Discord Webhooks:** Get notified in your Discord server when automated updates happen.
 *   **Automated Testing:** Powered by Jest and React Testing Library to ensure your APIs and UI remain stable.
 
-## 🚀 Getting Started
+## 🚀 Getting Started (For Beginners)
 
-### Prerequisites
-*   Linux Server (Ubuntu/Debian recommended)
-*   Node.js 18+ and npm
-*   `lib32gcc-s1` (Required by SteamCMD)
+We designed this manager so that you don't need to be a programmer to use it. If you can copy and paste, you can run a highly customized L4D2 server!
 
-### 1. Installation
-Clone the repository and run the setup script:
+### Step 1: Download the Manager
+Open your Linux terminal (e.g., PuTTY or your server's console) and copy-paste these commands one by one, pressing **Enter** after each:
 ```bash
-git clone git@github.com:howlcipher/l4d2_server_manager.git
+git clone https://github.com/howlcipher/l4d2_server_manager.git
 cd l4d2_server_manager
+```
+
+### Step 2: Run the Automated Setup
+We wrote a script that will automatically install all the boring technical stuff (Node.js, SteamCMD, Databases) for you:
+```bash
 ./setup.sh
 ```
-*(The setup script installs Node.js, dependencies, and prepares the local SQLite database).*
+*(Wait a minute or two for this to finish. It will print "Setup Complete!" when it's done.)*
 
-### 2. Start the Manager
-You can run the web dashboard in the background using PM2, or run it directly:
+### Step 3: Start the Web Dashboard
+Now, start the web interface so you can access it from your browser:
 ```bash
-npm run dev
-# OR for production:
-npm start
-```
-Go to `http://YOUR_SERVER_IP:3000` in your web browser. 
-
-### 3. Deploy the L4D2 Server
-Inside the web dashboard, click **"Install Server & Core Mods"**. The manager will automatically download the L4D2 server files and inject all the custom plugins and configs located in the `bundled_mods/` folder.
-
-### 4. Start the Background Daemon (Optional)
-To enable automated updates and Discord notifications, run the cron worker:
-```bash
-export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
-node cron.js &
+npm run build
+npx pm2 start npm --name "l4d2-web" -- start
 ```
 
-## 🧪 Running Tests
-To run the automated regression tests:
+### Step 4: Access Your Server
+1. Open your web browser (Chrome, Firefox, etc.).
+2. Type in your server's IP address followed by `:3000` (Example: `http://192.168.1.50:3000`).
+3. You should see the login screen!
+
+### Step 5: Install the Game
+Inside the web dashboard, simply click the **"Install Server & Core Mods"** button. The dashboard will automatically download the Left 4 Dead 2 game files and inject all the custom plugins for you.
+
+---
+
+## ⚙️ Advanced Configuration (Optional)
+
+### Automated Background Updates & Discord Webhooks
+If you want the server to automatically check for updates every night and send alerts to a Discord channel, run these commands:
 ```bash
+# Set your Discord webhook URL (replace the URL inside the quotes)
+export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/your-webhook-link"
+
+# Start the automated background worker
+npx pm2 start cron.js --name "l4d2-cron"
+```
+
+### 🧪 Running Tests (For Developers)
+If you are modifying the code and want to ensure you haven't broken anything, run the automated test suite:
+```bash
+npm install
 npm run test
 ```
 
