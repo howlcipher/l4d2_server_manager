@@ -1,63 +1,64 @@
-# L4D2 Server Manager
+# L4D2 Server Manager & Builder
 
-![L4D2 Manager](docs/og-image.jpg)
+The ultimate, all-in-one suite for deploying, configuring, and managing Left 4 Dead 2 dedicated servers on Linux. 
 
-A modern, highly-customizable web dashboard for deploying and managing Left 4 Dead 2 dedicated servers natively on Linux. Built with **Next.js**, **Tailwind CSS**, and **Prisma**, this tool gives you absolute control over your server without ever needing to touch the terminal.
+This project combines a **Next.js Web Dashboard** with a **Pre-bundled Mod Architecture**, meaning you can deploy a fully competitive, highly customized server with a single click.
 
 ## ✨ Features
-- **One-Click Deploy:** Automated `setup.sh` script installs everything (Node.js, SteamCMD, dependencies) for absolute beginners.
-- **Global Accessibility:** Built-in support for 9 languages 🇺🇸🇪🇸🇷🇺🇨🇳🇩🇪🇫🇮🇮🇳🇵🇱🇯🇵, seamless Light/Dark modes, and high-contrast Color-Blind mode.
-- **Live Config Editor:** Edit `server.cfg` and SourceMod configurations directly in the browser.
-- **VPK & Mod Uploader:** Upload custom maps, campaigns, and `.smx` plugins with a drag-and-drop interface.
-- **Secure Admin Dashboard:** NextAuth session management with SQLite ensures your server is locked down.
-- **Roadmap Ready:** UI scaffolding is live for Server Console streaming, Discord Webhooks, Auto-Updates, and Sub-Admin Management (Backend APIs coming soon).
-
-## 📸 Screenshots
-
-### The Web Dashboard
-![Web UI Screenshot](docs/screenshot.jpg)
-
-## 🛠 Planned Features
-- Real-time Server Console streaming
-- Automated SteamCMD L4D2 Updates
-- Multi-User Management / Sub-Admins
+*   **One-Click SteamCMD Deploy:** The `setup.sh` and web UI handle everything from downloading the game to installing Metamod and SourceMod.
+*   **Live RCON Web Terminal:** Send commands directly to your server from the web dashboard.
+*   **Server Metrics Dashboard:** View real-time graphs of your server's player count and status via `gamedig` and `recharts`.
+*   **Live Mod Toggling:** Enable or disable custom `.smx` plugins and `.vpk` addons instantly from the UI.
+*   **Automated Updates:** A built-in Node.js cron daemon checks for SteamCMD updates daily at 4:00 AM.
+*   **Discord Webhooks:** Get notified in your Discord server when automated updates happen.
+*   **Automated Testing:** Powered by Jest and React Testing Library to ensure your APIs and UI remain stable.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Linux Server (Ubuntu/Debian recommended)
-- Node.js 18+ and npm
-- `lib32gcc-s1` (Required by SteamCMD)
+*   Linux Server (Ubuntu/Debian recommended)
+*   Node.js 18+ and npm
+*   `lib32gcc-s1` (Required by SteamCMD)
 
-### Installation (For Beginners)
+### 1. Installation
+Clone the repository and run the setup script:
+```bash
+git clone git@github.com:howlcipher/l4d2_server_manager.git
+cd l4d2_server_manager
+./setup.sh
+```
+*(The setup script installs Node.js, dependencies, and prepares the local SQLite database).*
 
-We've created a completely automated, one-click installer designed for absolute beginners. You don't need to know how to set up databases or node modules.
+### 2. Start the Manager
+You can run the web dashboard in the background using PM2, or run it directly:
+```bash
+npm run dev
+# OR for production:
+npm start
+```
+Go to `http://YOUR_SERVER_IP:3000` in your web browser. 
 
-1. Open your terminal on your Linux server and clone the repository:
-   ```bash
-   git clone git@github.com:howlcipher/l4d2_server_manager.git
-   cd l4d2_server_manager
-   ```
-2. Run the automated setup script:
-   ```bash
-   ./setup.sh
-   ```
-   *This script will automatically install Node.js, download dependencies, configure the database, inject the default admin account, and build the dashboard.*
+### 3. Deploy the L4D2 Server
+Inside the web dashboard, click **"Install Server & Core Mods"**. The manager will automatically download the L4D2 server files and inject all the custom plugins and configs located in the `bundled_mods/` folder.
 
-3. Start the dashboard in the background so it runs 24/7:
-   ```bash
-   npx pm2 start npm --name "l4d2-manager" -- start
-   ```
+### 4. Start the Background Daemon (Optional)
+To enable automated updates and Discord notifications, run the cron worker:
+```bash
+export DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/..."
+node cron.js &
+```
 
-4. Go to `http://YOUR_SERVER_IP:3000` in your web browser.
-5. Login with Username: `admin` and Password: `123`
+## 🧪 Running Tests
+To run the automated regression tests:
+```bash
+npm run test
+```
 
-*(Note: Once logged in, click "Install Server & Core Mods" from the dashboard to download the actual L4D2 server files).*
-
-## 🎨 Architecture
-- **Frontend:** Next.js App Router (React), Tailwind CSS, Framer Motion for animations, Lucide Icons.
-- **Backend:** Next.js API Routes, NextAuth.js for session management, Prisma ORM with SQLite.
-- **System:** Uses Node's `child_process` to spawn and manage the detached `srcds_run` L4D2 process and read/write to the Linux file system natively.
+## 📂 Architecture
+*   **`bundled_mods/`**: The statically compiled directory containing all custom `.smx` plugins, `.so` extensions, `.cfg` configurations, and VScripts ready to be injected into the server.
+*   **`src/app/`**: The Next.js frontend and API routes.
+*   **`cron.js`**: The background worker for automation.
+*   **`docs/`**: The 16-bit retro GitHub Pages landing site.
 
 ## 📝 License
 MIT License. Created for the L4D2 Modding Community.
