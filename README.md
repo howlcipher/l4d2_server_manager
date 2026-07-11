@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
-  <img src="https://img.shields.io/github/license/howlcipher/l4d2_server_manager?color=green&style=for-the-badge" alt="License" />
 </div>
 
 The ultimate, all-in-one suite for deploying, configuring, and managing Left 4 Dead 2 dedicated servers on Linux. 
