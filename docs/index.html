@@ -3,483 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L4D2 Server Manager | Complete Control</title>
-    <meta name="description" content="The ultimate web dashboard for managing Left 4 Dead 2 dedicated servers natively on Linux. Best viewed with Netscape Navigator.">
-    
-    <!-- Open Graph / Discord / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://howlcipher.github.io/l4d2_server_manager/">
-    <meta property="og:title" content="L4D2 Server Manager | Complete Control">
-    <meta property="og:description" content="The ultimate web dashboard for managing Left 4 Dead 2 dedicated servers natively on Linux. Best viewed with Netscape Navigator.">
-    <meta property="og:image" content="https://howlcipher.github.io/l4d2_server_manager/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://howlcipher.github.io/l4d2_server_manager/">
-    <meta property="twitter:title" content="L4D2 Server Manager | Complete Control">
-    <meta property="twitter:description" content="The ultimate web dashboard for managing Left 4 Dead 2 dedicated servers natively on Linux. Best viewed with Netscape Navigator.">
-    <meta property="twitter:image" content="https://howlcipher.github.io/l4d2_server_manager/og-image.jpg">
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
+    <title>L4D2 Server Manager | 16-Bit Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
-    <bgsound src="https://bitmidi.com/uploads/16279.mid" loop="infinite">
-    <h1 style="text-align: center; color: #ff0000; font-family: 'Impact', sans-serif; text-shadow: 2px 2px #ffff00; font-size: 50px;"><blink>LEFT 4 DEAD 2 SERVER MANAGER</blink></h1>
-    <h2 style="text-align: center; color: #00ff00;">Complete Control. Zero Hassle.</h2>
-
-    <div style="text-align: center; margin: 30px 0;">
-      <a href="https://github.com/howlcipher/l4d2_server_manager/releases/latest/download/l4d2-manager-linux-amd64" style="background-color: red; color: yellow; font-family: 'Impact', sans-serif; font-size: 28px; text-decoration: none; padding: 10px 20px; border: 5px outset #ffaaaa; display: inline-block;">
-        💾 DOWNLOAD AUTO-INSTALLER 💾<br>
-        <span style="font-size: 14px; font-family: 'Comic Sans MS', cursive;">(For Linux 64-bit)</span>
-      </a>
-      <p style="color: #00ff00; font-size: 14px; margin-top: 10px;">To install, just run: <code>chmod +x l4d2-manager-linux-amd64 && ./l4d2-manager-linux-amd64 install</code></p>
-    </div>
-    <div style="text-align: center; margin-top: 10px;">
-        <p><span class="blink" style="color: yellow; font-size: 1.2rem;">LAST UPDATED: JULY 09, 2026</span></p>
+<body>
+    <div class="crt-overlay"></div>
+    <div class="container">
         
-        <!-- Modern MIDI Player Polyfill -->
-        <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
-        <midi-player
-          src="https://bitmidi.com/uploads/16279.mid"
-          autoplay
-          sound-font
-          style="border: 3px ridge red; margin: 0 auto; display: block; width: 300px; background: #000;"
-        ></midi-player>
-        <p style="color: #ffaaaa; font-size: 12px; margin-top: 5px;">(Note: You may need to press Play due to modern browser autoplay rules!)</p>
+        <div class="controls">
+            <button class="pixel-btn" id="theme-dark">Dark Mode</button>
+            <button class="pixel-btn" id="theme-light">Light Mode</button>
+            <button class="pixel-btn" id="theme-cb">Colorblind</button>
+        </div>
+
+        <header class="retro-box">
+            <h1>LEFT 4 DEAD 2</h1>
+            <h2>SERVER BUILDER & MANAGER</h2>
+        </header>
+
+        <section class="retro-box">
+            <h3>SELECT YOUR WEAPON</h3>
+            <p>Deploy, configure, and manage your L4D2 Dedicated Server from a premium Next.js dashboard.</p>
+            <p>Features include:</p>
+            <ul>
+                <li>One-Click SteamCMD Deploy</li>
+                <li>Live Server.cfg Editor</li>
+                <li>Mod & VPK Toggling</li>
+                <li>Secure Admin Login</li>
+            </ul>
+        </section>
+
+        <section class="retro-box center">
+            <h3 class="blink">>>> READY TO DOWNLOAD <<<</h3>
+            <a href="https://github.com/howlcipher/l4d2_server_manager/archive/refs/heads/main.zip" class="pixel-btn download-btn">DOWNLOAD SETUP ZIP</a>
+        </section>
+
     </div>
-
-    <div class="top-bar">
-        <span class="flag-btn" data-lang="en">🇺🇸</span>
-        <span class="flag-btn" data-lang="es">🇪🇸</span>
-        <span class="flag-btn" data-lang="ru">🇷🇺</span>
-        <span class="flag-btn" data-lang="zh">🇨🇳</span>
-        <span class="flag-btn" data-lang="de">🇩🇪</span>
-        <span class="flag-btn" data-lang="fi">🇫🇮</span>
-        <span class="flag-btn" data-lang="hi">🇮🇳</span>
-        <span class="flag-btn" data-lang="pl">🇵🇱</span>
-        <span class="flag-btn" data-lang="ja">🇯🇵</span>
-    </div>
-
-    <header>
-        <div class="logo-container">
-            <img src="logo.jpg" alt="Zombie Hand Logo" class="geocities-logo">
-            <h1 id="title-main">LEFT 4 DEAD 2</h1>
-            <h2 id="title-sub" class="subtitle">SERVER MANAGER</h2>
-        </div>
-    </header>
-
-    <table border="5" cellpadding="15" cellspacing="5" bordercolor="#00ff00" bgcolor="#111111" align="center" width="85%">
-        <tr>
-            <td>
-                <main>
-                    <marquee direction="right" scrollamount="12">⚠️ WARNING: INFECTION DETECTED ⚠️ UNDER CONSTRUCTION ⚠️</marquee>
-                    
-                    <div id="ip-grabber" class="ip-grabber">
-                        <p><blink>⚠️ INTRUDER ALERT ⚠️</blink></p>
-                        <p>WE ARE TRACKING YOU. YOUR IP IS: <span id="user-ip">LOCATING...</span></p>
-                        <p>BROWSER: <span id="user-browser"></span></p>
-                        <p>THE HORDE IS ON ITS WAY...</p>
-                    </div>
-
-                    <section class="hero">
-                        <p id="hero-tagline" class="tagline">TAKE ABSOLUTE CONTROL.</p>
-                        <p id="hero-desc" class="description">Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.</p>
-                        <div class="cta-group">
-                            <a id="btn-github" href="https://github.com/howlcipher/l4d2_server_manager" class="btn btn-primary">VIEW ON GITHUB</a>
-                        </div>
-                        <img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/underconstruction.gif" alt="Under Construction">
-                    </section>
-
-                    <section id="features" class="features-section">
-                        <div class="section-header">
-                            <h3 id="feat-title">THE ARSENAL</h3>
-                            <div class="divider"></div>
-                        </div>
-                        
-                        <div class="features-grid">
-                            <div class="feature-card">
-                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/linux.gif" alt="Deploy"></div>
-                                <h4 id="feat-1-title">ONE-CLICK DEPLOY</h4>
-                                <p id="feat-1-desc">Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.</p>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/notepad.gif" alt="Editor"></div>
-                                <h4 id="feat-2-title">LIVE CONFIG EDITOR</h4>
-                                <p id="feat-2-desc">Edit server.cfg and all SourceMod plugin configurations in a built-in code editor. Save and apply instantly.</p>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/winzip.gif" alt="Zip"></div>
-                                <h4 id="feat-3-title">VPK & MOD UPLOADER</h4>
-                                <p id="feat-3-desc">Drag and drop custom maps, campaigns, and .smx plugins directly into the server's addons directory.</p>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="icon"><img src="https://cyber.dabamos.de/88x31/pgpi.gif" alt="Secure"></div>
-                                <h4 id="feat-4-title">SECURE ADMIN</h4>
-                                <p id="feat-4-desc">Local SQLite database with NextAuth session management keeps your server controls locked down from the horde.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="roadmap">
-                        <div class="section-header">
-                            <h3 id="road-title">NEW FEATURES INCLUDED</h3>
-                        </div>
-                        <ul class="roadmap-list">
-                            <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-1-badge">Live</span> <span id="road-1">Live Server Console & Chat Streaming</span></li>
-                            <li><img src="https://web.archive.org/web/20090829105421/http://geocities.com/Heartland/Acres/5850/hot.gif" alt="HOT"> <span class="status status-done" id="stat-2-badge">Live</span> <span id="road-2">Multi-user Sub-admin Management</span></li>
-                            <li><img src="https://web.archive.org/web/20090829104037/http://geocities.com/Heartland/Acres/5850/new.gif" alt="NEW"> <span class="status status-done" id="stat-3-badge">Live</span> <span id="road-3">Automated SteamCMD Updates</span></li>
-                            <li><span class="status status-done" id="stat-4-badge">Live</span> <span id="road-4">Discord Webhook Integration</span></li>
-                        </ul>
-                    </section>
-                </main>
-            </td>
-        </tr>
-    </table>
-
-    <footer>
-        <div style="text-align: center; margin-bottom: 20px;">
-            <a href="http://localhost:3000/guestbook" target="_blank" style="color: yellow; font-size: 20px; font-weight: bold; background: #ff0000; padding: 5px; text-decoration: none; border: 2px solid white;">[ 📖 SIGN MY GUESTBOOK ]</a>
-            <p style="font-size: 14px; color: #fff;">(Requires L4D2 Manager server running locally)</p>
-        </div>
-        
-        <div class="webring">
-            <p><strong><blink>ZOMBIE SURVIVORS WEBRING</blink></strong></p>
-            <a href="#" style="color:var(--l4d-green)">[<- Previous]</a> <a href="#" style="color:yellow">[Random]</a> <a href="#" style="color:var(--l4d-green)">[Next ->]</a>
-        </div>
-
-        <div class="badges">
-            <img src="https://cyber.dabamos.de/88x31/netscape4.gif" alt="Netscape">
-            <img src="https://cyber.dabamos.de/88x31/ie01.gif" alt="Internet Explorer">
-            <img src="https://cyber.dabamos.de/88x31/bestviewed.gif" alt="Best Viewed 800x600">
-            <img src="https://cyber.dabamos.de/88x31/html2.gif" alt="HTML 3.2">
-        </div>
-
-        <p id="footer-text">Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation.</p>
-        <div class="hit-counter">
-            <p>You are survivor number:</p>
-            <style>
-            .odometer {
-                display: inline-block;
-                background: black;
-                border: 3px inset #555;
-                padding: 2px;
-            }
-            .digit {
-                display: inline-block;
-                background: #111;
-                color: #0f0;
-                font-family: "Courier New", Courier, monospace;
-                font-size: 24px;
-                font-weight: bold;
-                padding: 2px 5px;
-                margin: 0 1px;
-                border: 1px solid #333;
-            }
-            </style>
-            <div class="odometer" id="fake-hit-counter">
-                <span class="digit">0</span>
-                <span class="digit">1</span>
-                <span class="digit">0</span>
-                <span class="digit">5</span>
-                <span class="digit">3</span>
-                <span class="digit">2</span>
-                <span class="digit">8</span>
-            </div>
-            <script>
-                let hits = localStorage.getItem('l4d2_hits');
-                if (!hits) hits = Math.floor(Math.random() * 50000) + 1000000;
-                hits = parseInt(hits) + 1;
-                localStorage.setItem('l4d2_hits', hits);
-                
-                const hitStr = hits.toString().padStart(7, '0');
-                const counterDiv = document.getElementById('fake-hit-counter');
-                if (counterDiv) {
-                    counterDiv.innerHTML = '';
-                    for (let char of hitStr) {
-                        let span = document.createElement('span');
-                        span.className = 'digit';
-                        span.innerText = char;
-                        counterDiv.appendChild(span);
-                    }
-                }
-            </script>
-        </div>
-        <hr color="red" size="5">
-    </footer>
 
     <script>
-        const langBtns = document.querySelectorAll('.flag-btn');
-        const translations = {
-            en: {
-                "title-sub": "SERVER MANAGER",
-                "hero-tagline": "TAKE ABSOLUTE CONTROL.",
-                "hero-desc": "Deploy, configure, and manage your L4D2 Dedicated Server from a premium web dashboard. No more terminals. No more FTP.",
-                "btn-github": "VIEW ON GITHUB",
-                "feat-title": "THE ARSENAL",
-                "feat-1-title": "ONE-CLICK DEPLOY",
-                "feat-1-desc": "Automated SteamCMD installation, server downloads, and Metamod/SourceMod integration directly from the browser.",
-                "feat-2-title": "LIVE CONFIG EDITOR",
-                "feat-2-desc": "Edit server.cfg and all SourceMod plugin configurations in a built-in code editor. Save and apply instantly.",
-                "feat-3-title": "VPK & MOD UPLOADER",
-                "feat-3-desc": "Drag and drop custom maps, campaigns, and .smx plugins directly into the server's addons directory.",
-                "feat-4-title": "SECURE ADMIN",
-                "feat-4-desc": "Local SQLite database with NextAuth session management keeps your server controls locked down from the horde.",
-                "road-title": "NEW FEATURES INCLUDED",
-                "stat-1-badge": "Live", "stat-2-badge": "Live", "stat-3-badge": "Live", "stat-4-badge": "Live",
-                "road-1": "Live Server Console & Chat Streaming",
-                "road-2": "Multi-user Sub-admin Management",
-                "road-3": "Automated SteamCMD Updates",
-                "road-4": "Discord Webhook Integration",
-                "footer-text": "Created for the Left 4 Dead 2 Modding Community. Not affiliated with Valve Corporation."
-            },
-            es: {
-                "title-sub": "GESTOR DE SERVIDOR",
-                "hero-tagline": "TOMA EL CONTROL ABSOLUTO.",
-                "hero-desc": "Despliega, configura y gestiona tu servidor dedicado L4D2 desde un panel web premium. No más terminales. No más FTP.",
-                "btn-github": "VER EN GITHUB",
-                "feat-title": "EL ARSENAL",
-                "feat-1-title": "DESPLIEGUE EN UN CLIC",
-                "feat-1-desc": "Instalación automatizada de SteamCMD, descargas de servidor e integración de Metamod/SourceMod directamente desde el navegador.",
-                "feat-2-title": "EDITOR DE CONFIGURACIÓN EN VIVO",
-                "feat-2-desc": "Edita server.cfg y todas las configuraciones de plugins de SourceMod en un editor de código integrado. Guarda y aplica al instante.",
-                "feat-3-title": "CARGADOR DE VPK Y MODS",
-                "feat-3-desc": "Arrastra y suelta mapas personalizados, campañas y plugins .smx directamente en el directorio de addons del servidor.",
-                "feat-4-title": "ADMINISTRADOR SEGURO",
-                "feat-4-desc": "Base de datos local SQLite con gestión de sesión NextAuth mantiene los controles de tu servidor a salvo de la horda.",
-                "road-title": "NUEVAS FUNCIONES INCLUIDAS",
-                "stat-1-badge": "En vivo", "stat-2-badge": "En vivo", "stat-3-badge": "En vivo", "stat-4-badge": "En vivo",
-                "road-1": "Consola de servidor en vivo y transmisión de chat",
-                "road-2": "Gestión de sub-administradores multiusuario",
-                "road-3": "Actualizaciones automatizadas de SteamCMD",
-                "road-4": "Integración de Discord Webhook",
-                "footer-text": "Creado para la comunidad de modding de Left 4 Dead 2. No afiliado con Valve Corporation."
-            },
-            ru: {
-                "title-sub": "МЕНЕДЖЕР СЕРВЕРА",
-                "hero-tagline": "ВОЗЬМИТЕ АБСОЛЮТНЫЙ КОНТРОЛЬ.",
-                "hero-desc": "Развертывайте, настраивайте и управляйте своим выделенным сервером L4D2 из премиальной веб-панели. Больше никаких терминалов. Больше никакого FTP.",
-                "btn-github": "ПОСМОТРЕТЬ НА GITHUB",
-                "feat-title": "АРСЕНАЛ",
-                "feat-1-title": "РАЗВЕРТЫВАНИЕ В ОДИН КЛИК",
-                "feat-1-desc": "Автоматизированная установка SteamCMD, загрузка сервера и интеграция Metamod/SourceMod прямо из браузера.",
-                "feat-2-title": "ЖИВОЙ РЕДАКТОР КОНФИГУРАЦИЙ",
-                "feat-2-desc": "Редактируйте server.cfg и конфигурации всех плагинов SourceMod во встроенном редакторе кода. Сохраняйте и применяйте мгновенно.",
-                "feat-3-title": "ЗАГРУЗЧИК VPK И МОДОВ",
-                "feat-3-desc": "Перетаскивайте пользовательские карты, кампании и плагины .smx прямо в каталог аддонов сервера.",
-                "feat-4-title": "БЕЗОПАСНЫЙ АДМИН",
-                "feat-4-desc": "Локальная база данных SQLite с управлением сессиями NextAuth защищает элементы управления вашим сервером от орды.",
-                "road-title": "ВКЛЮЧЕНЫ НОВЫЕ ФУНКЦИИ",
-                "stat-1-badge": "Вживую", "stat-2-badge": "Вживую", "stat-3-badge": "Вживую", "stat-4-badge": "Вживую",
-                "road-1": "Живая консоль сервера и трансляция чата",
-                "road-2": "Управление субадминистраторами",
-                "road-3": "Автоматизированные обновления SteamCMD",
-                "road-4": "Интеграция Discord Webhook",
-                "footer-text": "Создано для сообщества моддинга Left 4 Dead 2. Не связано с Valve Corporation."
-            },
-            zh: {
-                "title-sub": "服务器管理器",
-                "hero-tagline": "掌握绝对控制权。",
-                "hero-desc": "通过高级Web面板部署、配置和管理您的L4D2专用服务器。不再需要终端，不再需要FTP。",
-                "btn-github": "在GITHUB上查看",
-                "feat-title": "军械库",
-                "feat-1-title": "一键部署",
-                "feat-1-desc": "直接从浏览器自动安装SteamCMD、下载服务器和集成Metamod/SourceMod。",
-                "feat-2-title": "实时配置编辑器",
-                "feat-2-desc": "在内置代码编辑器中编辑server.cfg和所有SourceMod插件配置。即时保存并应用。",
-                "feat-3-title": "VPK和MOD上传器",
-                "feat-3-desc": "直接将自定义地图、战役和.smx插件拖放到服务器的addons目录中。",
-                "feat-4-title": "安全管理",
-                "feat-4-desc": "带有NextAuth会话管理的本地SQLite数据库可确保您的服务器控制安全。",
-                "road-title": "包含的新功能",
-                "stat-1-badge": "实时", "stat-2-badge": "实时", "stat-3-badge": "实时", "stat-4-badge": "实时",
-                "road-1": "实时服务器控制台和聊天流",
-                "road-2": "多用户子管理员管理",
-                "road-3": "自动SteamCMD更新",
-                "road-4": "Discord Webhook集成",
-                "footer-text": "为Left 4 Dead 2模组社区创建。与Valve Corporation无关。"
-            },
-            de: {
-                "title-sub": "SERVER-MANAGER",
-                "hero-tagline": "ÜBERNIMM DIE ABSOLUTE KONTROLLE.",
-                "hero-desc": "Stelle deinen L4D2 Dedicated Server über ein Premium-Web-Dashboard bereit, konfiguriere und verwalte ihn. Keine Terminals mehr. Kein FTP mehr.",
-                "btn-github": "AUF GITHUB ANSEHEN",
-                "feat-title": "DAS ARSENAL",
-                "feat-1-title": "ONE-CLICK DEPLOY",
-                "feat-1-desc": "Automatisierte SteamCMD-Installation, Server-Downloads und Metamod/SourceMod-Integration direkt aus dem Browser.",
-                "feat-2-title": "LIVE CONFIG EDITOR",
-                "feat-2-desc": "Bearbeite server.cfg und alle SourceMod-Plugin-Konfigurationen im integrierten Code-Editor. Speichern und sofort anwenden.",
-                "feat-3-title": "VPK & MOD UPLOADER",
-                "feat-3-desc": "Ziehe benutzerdefinierte Karten, Kampagnen und .smx-Plugins direkt in das Addons-Verzeichnis des Servers.",
-                "feat-4-title": "SECURE ADMIN",
-                "feat-4-desc": "Eine lokale SQLite-Datenbank mit NextAuth-Sitzungsverwaltung hält deine Serversteuerung sicher vor der Horde.",
-                "road-title": "NEUE FUNKTIONEN ENTHALTEN",
-                "stat-1-badge": "Live", "stat-2-badge": "Live", "stat-3-badge": "Live", "stat-4-badge": "Live",
-                "road-1": "Live Server-Konsole & Chat-Streaming",
-                "road-2": "Multi-User Sub-Admin Management",
-                "road-3": "Automatisierte SteamCMD-Updates",
-                "road-4": "Discord Webhook-Integration",
-                "footer-text": "Erstellt für die Left 4 Dead 2 Modding-Community. Nicht mit der Valve Corporation verbunden."
-            },
-            fi: {
-                "title-sub": "PALVELIMEN HALLINTA",
-                "hero-tagline": "OTA TÄYSI HALLINTA.",
-                "hero-desc": "Ota käyttöön, määritä ja hallinnoi L4D2-palvelintasi ensiluokkaisesta verkkokojelaudasta. Ei enää terminaaleja. Ei enää FTP:tä.",
-                "btn-github": "KATSO GITHUBISSA",
-                "feat-title": "ARSENAALI",
-                "feat-1-title": "YHDEN NAPIN ASENNUS",
-                "feat-1-desc": "Automaattinen SteamCMD-asennus, palvelinlataukset ja Metamod/SourceMod-integraatio suoraan selaimesta.",
-                "feat-2-title": "LIVE-ASETUSTEN MUOKKAUS",
-                "feat-2-desc": "Muokkaa server.cfg:tä ja kaikkia SourceMod-liitännäisten asetuksia sisäänrakennetussa koodieditorissa.",
-                "feat-3-title": "VPK & MODI LATAUS",
-                "feat-3-desc": "Vedä ja pudota mukautetut kartat, kampanjat ja .smx-liitännäiset suoraan lisäosahakemistoon.",
-                "feat-4-title": "TURVALLINEN JÄRJESTELMÄNVALVOJA",
-                "feat-4-desc": "Paikallinen SQLite-tietokanta NextAuth-istunnonhallinnalla pitää palvelimesi turvassa.",
-                "road-title": "UUDET OMINAISUUDET MUKANA",
-                "stat-1-badge": "Live", "stat-2-badge": "Live", "stat-3-badge": "Live", "stat-4-badge": "Live",
-                "road-1": "Live-palvelinkonsoli ja chatin suoratoisto",
-                "road-2": "Monen käyttäjän alivalvojien hallinta",
-                "road-3": "Automaattiset SteamCMD-päivitykset",
-                "road-4": "Discord Webhook -integraatio",
-                "footer-text": "Luotu Left 4 Dead 2 -modausyhteisölle. Ei sidoksissa Valve Corporationiin."
-            },
-            hi: {
-                "title-sub": "सर्वर प्रबंधक",
-                "hero-tagline": "पूर्ण नियंत्रण लें।",
-                "hero-desc": "एक प्रीमियम वेब डैशबोर्ड से अपने L4D2 समर्पित सर्वर को तैनात, कॉन्फ़िगर और प्रबंधित करें। कोई टर्मिनल नहीं। कोई FTP नहीं।",
-                "btn-github": "GITHUB पर देखें",
-                "feat-title": "शस्त्रागार",
-                "feat-1-title": "एक-क्लिक परिनियोजन",
-                "feat-1-desc": "सीधे ब्राउज़र से स्वचालित SteamCMD इंस्टॉलेशन, सर्वर डाउनलोड और Metamod/SourceMod एकीकरण।",
-                "feat-2-title": "लाइव कॉन्फ़िगरेशन संपादक",
-                "feat-2-desc": "इन-बिल्ट कोड एडिटर में server.cfg और सभी SourceMod प्लगइन कॉन्फ़िगरेशन संपादित करें। सहेजें और तुरंत लागू करें।",
-                "feat-3-title": "VPK और मॉड अपलोडर",
-                "feat-3-desc": "कस्टम मैप, अभियान और .smx प्लगइन्स को सीधे सर्वर की ऐडऑन डायरेक्टरी में खींचें और छोड़ें।",
-                "feat-4-title": "सुरक्षित व्यवस्थापक",
-                "feat-4-desc": "NextAuth सत्र प्रबंधन के साथ स्थानीय SQLite डेटाबेस आपके सर्वर नियंत्रण को सुरक्षित रखता है।",
-                "road-title": "नई सुविधाएँ शामिल",
-                "stat-1-badge": "लाइव", "stat-2-badge": "लाइव", "stat-3-badge": "लाइव", "stat-4-badge": "लाइव",
-                "road-1": "लाइव सर्वर कंसोल और चैट स्ट्रीमिंग",
-                "road-2": "मल्टी-यूजर सब-एडमिन प्रबंधन",
-                "road-3": "स्वचालित SteamCMD अपडेट",
-                "road-4": "Discord वेबहुक एकीकरण",
-                "footer-text": "Left 4 Dead 2 मॉडडिंग समुदाय के लिए बनाया गया। Valve Corporation से संबद्ध नहीं है।"
-            },
-            pl: {
-                "title-sub": "MENEDŻER SERWERA",
-                "hero-tagline": "PRZEJMIJ CAŁKOWITĄ KONTROLĘ.",
-                "hero-desc": "Wdrażaj, konfiguruj i zarządzaj swoim dedykowanym serwerem L4D2 z poziomu interfejsu WWW. Żadnych terminali. Żadnego FTP.",
-                "btn-github": "ZOBACZ NA GITHUBIE",
-                "feat-title": "ARSENAŁ",
-                "feat-1-title": "INSTALACJA JEDNYM KLIKNIĘCIEM",
-                "feat-1-desc": "Zautomatyzowana instalacja SteamCMD, pobieranie serwera i integracja Metamod/SourceMod prosto z przeglądarki.",
-                "feat-2-title": "EDYTOR KONFIGURACJI NA ŻYWO",
-                "feat-2-desc": "Edytuj server.cfg i wszystkie konfiguracje wtyczek SourceMod we wbudowanym edytorze kodu. Zapisz i zastosuj natychmiast.",
-                "feat-3-title": "UPLOADER VPK I MODÓW",
-                "feat-3-desc": "Przeciągnij i upuść niestandardowe mapy, kampanie i wtyczki .smx bezpośrednio do katalogu addons serwera.",
-                "feat-4-title": "BEZPIECZNY ADMIN",
-                "feat-4-desc": "Lokalna baza danych SQLite z zarządzaniem sesjami NextAuth dba o bezpieczeństwo Twojego serwera.",
-                "road-title": "NOWE FUNKCJE ZAWARTE",
-                "stat-1-badge": "Na żywo", "stat-2-badge": "Na żywo", "stat-3-badge": "Na żywo", "stat-4-badge": "Na żywo",
-                "road-1": "Konsola serwera na żywo i strumieniowanie czatu",
-                "road-2": "Zarządzanie wieloma sub-administratorami",
-                "road-3": "Zautomatyzowane aktualizacje SteamCMD",
-                "road-4": "Integracja Discord Webhook",
-                "footer-text": "Stworzone dla społeczności L4D2. Niezwiązane z Valve Corporation."
-            },
-            ja: {
-                "title-sub": "サーバーマネージャー",
-                "hero-tagline": "絶対的なコントロールを手に入れろ。",
-                "hero-desc": "プレミアムなWebダッシュボードからL4D2専用サーバーを展開、構成、管理します。ターミナルもFTPも不要です。",
-                "btn-github": "GITHUBで見る",
-                "feat-title": "アーセナル",
-                "feat-1-title": "ワンクリック展開",
-                "feat-1-desc": "ブラウザから直接、自動化されたSteamCMDのインストール、サーバーのダウンロード、およびMetamod/SourceModの統合。",
-                "feat-2-title": "ライブ構成エディター",
-                "feat-2-desc": "組み込みのコードエディターでserver.cfgとすべてのSourceModプラグイン構成を編集します。即座に保存して適用します。",
-                "feat-3-title": "VPK＆MODアップローダー",
-                "feat-3-desc": "カスタムマップ、キャンペーン、および.smxプラグインをサーバーのアドオンディレクトリに直接ドラッグアンドドロップします。",
-                "feat-4-title": "セキュア管理者",
-                "feat-4-desc": "NextAuthセッション管理を備えたローカルSQLiteデータベースにより、サーバーの制御が安全に保たれます。",
-                "road-title": "新機能搭載",
-                "stat-1-badge": "ライブ", "stat-2-badge": "ライブ", "stat-3-badge": "ライブ", "stat-4-badge": "ライブ",
-                "road-1": "ライブサーバーコンソールとチャットストリーミング",
-                "road-2": "マルチユーザーサブ管理者管理",
-                "road3": "自動SteamCMDアップデート",
-                "road-4": "Discord Webhook統合",
-                "footer-text": "L4D2モッディングコミュニティのために作成されました。Valve Corporationとは関係ありません。"
-            }
-        };
-
-        function setLanguage(lang) {
-            const t = translations[lang];
-            if (!t) return;
-            for (let id in t) {
-                const el = document.getElementById(id);
-                if (el) el.innerText = t[id];
-            }
-        }
-
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                setLanguage(btn.getAttribute('data-lang'));
-            });
-        });
-
-        fetch('https://api.ipify.org?format=json')
-            .then(r => r.json())
-            .then(data => {
-                const ipSpan = document.getElementById('user-ip');
-                if(ipSpan) ipSpan.textContent = data.ip;
-                const browserSpan = document.getElementById('user-browser');
-                if(browserSpan) browserSpan.textContent = navigator.appName + " " + navigator.appVersion;
-            })
-            .catch(() => {
-                const ipSpan = document.getElementById('user-ip');
-                if(ipSpan) ipSpan.textContent = "UNKNOWN... BUT WE KNOW WHERE YOU LIVE.";
-            });
-
-        const trailElements = [];
-        const trailCount = 10;
-        const trailChars = ['🩸', '🧟', '💀', '🧠'];
+        const body = document.body;
+        document.getElementById('theme-dark').addEventListener('click', () => body.className = 'theme-dark');
+        document.getElementById('theme-light').addEventListener('click', () => body.className = 'theme-light');
+        document.getElementById('theme-cb').addEventListener('click', () => body.className = 'theme-colorblind');
         
-        for (let i = 0; i < trailCount; i++) {
-            let el = document.createElement('div');
-            el.className = 'trail';
-            el.textContent = trailChars[Math.floor(Math.random() * trailChars.length)];
-            document.body.appendChild(el);
-            trailElements.push(el);
-        }
-
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let historyX = Array(trailCount).fill(mouseX);
-        let historyY = Array(trailCount).fill(mouseY);
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.pageX;
-            mouseY = e.pageY;
-        });
-
-        function animateTrail() {
-            historyX.unshift(mouseX);
-            historyY.unshift(mouseY);
-            historyX.pop();
-            historyY.pop();
-
-            for (let i = 0; i < trailCount; i++) {
-                let el = trailElements[i];
-                el.style.left = (historyX[i] + 10 + i * 2) + 'px';
-                el.style.top = (historyY[i] + 10 + i * 2) + 'px';
-                el.style.opacity = 1 - (i / trailCount);
-            }
-            requestAnimationFrame(animateTrail);
-        }
-        animateTrail();
+        // Default theme
+        body.className = 'theme-dark';
     </script>
 </body>
 </html>
